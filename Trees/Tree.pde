@@ -4,9 +4,9 @@ class Tree {
   float thickness;
   PImage leaf;
   PImage branch;
-  float theta;   
-  float rotationFactor;
-  float lean;
+  float theta;             // The angle of each branch
+  float rotationFactor;    // Controls how far the branches spread apart [0..90]
+  float lean;              // Controls the direction of lean [0.0..10.0]
   
   Tree(PVector location_, int size_, PImage leaf_, PImage branch_) {
     location = location_;
