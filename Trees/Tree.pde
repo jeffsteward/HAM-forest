@@ -5,6 +5,8 @@ class Tree {
   PImage leaf;
   PImage branch;
   float theta;   
+  float rotationFactor;
+  float lean;
   
   Tree(PVector location_, int size_, PImage leaf_, PImage branch_) {
     location = location_;
@@ -12,6 +14,9 @@ class Tree {
     thickness = size/10;
     leaf = leaf_;
     branch = branch_;
+    lean = random(0.30, 7.0);
+    
+    rotationFactor = random(20.0, 65.0); // How much should the branches move when the mouse moves
   }
   
 
@@ -24,8 +29,7 @@ class Tree {
     // Here, ours is when the length of the branch is 10 pixels or less
     if (h > 10) {
       pushMatrix();    // Save the current state of transformation (i.e. where are we now)
-      rotate(theta);   // Rotate by theta
-      
+      rotate(theta);   // Rotate by theta      
       image(branch, 0, 0, t, -h);
       translate(0, -h); // Move to the end of the branch
       branch(h, t);       // Ok, now call myself to draw two new branches!!
@@ -40,15 +44,14 @@ class Tree {
       
       // Repeat the same thing, only branch off to the "left" this time!
       pushMatrix();
-      rotate(-theta);
+      rotate(-theta/lean);
       image(branch, 0, 0, t, -h);
       translate(0, -h);
       branch(h, t);
-      popMatrix();
-      
+      popMatrix();      
       
       pushMatrix();
-      rotate(-theta);
+      rotate(-theta/lean);
       translate(0, -h);
       image(leaf, 0,0,20, 20);
       popMatrix();
@@ -58,7 +61,7 @@ class Tree {
   void render() {
 
     // Let's pick an angle 0 to 90 degrees based on the mouse position
-    float a = (mouseX / (float) width) * 90f;
+    float a = (mouseX / (float) width) * rotationFactor;
     // Convert it to radians
     theta = radians(a);    
     
