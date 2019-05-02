@@ -8,9 +8,9 @@
  * and right to change the angle.
  */
  
-PImage[] leafs = new PImage[2];
-PImage[] branchs = new PImage[2];
-Tree[] trees = new Tree[4];
+PImage[] leafs = new PImage[3];
+PImage[] branchs = new PImage[3];
+Tree[] trees = new Tree[6];
 
 void setup() {
   //size(640, 360);
@@ -18,14 +18,18 @@ void setup() {
   
   leafs[0] = loadImage("https://ids.lib.harvard.edu/ids/iiif/423290977/445,946,105,66/full/0/default.jpg");
   leafs[1] = loadImage("https://ids.lib.harvard.edu/ids/iiif/423290977/1090,2302,112,191/full/0/default.jpg");
+  leafs[2] = loadImage("https://idscache.harvardartmuseums.org/ids/iiif/43182690/476,668,162,141/full/0/default.jpg");
   
   branchs[0] = loadImage("https://ids.lib.harvard.edu/ids/iiif/423290977/802,2165,46,254/full/0/default.jpg");
   branchs[1] = loadImage("https://ids.lib.harvard.edu/ids/iiif/423290977/1261,315,59,486/full/0/default.jpg");
+  branchs[2] = loadImage("https://ids.lib.harvard.edu/ids/iiif/43182690/433,1487,46,243/full/0/default.jpg");
   
   trees[0] = new Tree(new PVector(width/4,height), 320, leafs[0], branchs[0]);
-  trees[1] = new Tree(new PVector(width*.75,height), 220, leafs[1], branchs[1]);
-  trees[2] = new Tree(new PVector(width/2,height), 420, leafs[1], branchs[0]);
+  trees[2] = new Tree(new PVector(width*.75,height), 220, leafs[1], branchs[1]);
+  trees[5] = new Tree(new PVector(width/2,height), 420, leafs[1], branchs[0]);
   trees[3] = new Tree(new PVector(width*.70,height), 75, leafs[0], branchs[1]);
+  trees[4] = new Tree(new PVector(width/6,height), 140, leafs[2], branchs[2]);
+  trees[1] = new Tree(new PVector(width*.8,height), 100, leafs[2], branchs[1]);
 }
 
 void draw() {
