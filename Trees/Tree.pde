@@ -8,15 +8,19 @@ class Tree {
   float rotationFactor;    // Controls how far the branches spread apart [0..90]
   float lean;              // Controls the direction of lean [0.0..10.0]
   
-  Tree(PVector location_, int size_, PImage leaf_, PImage branch_) {
+  //Tree(PVector location_, int size_, PImage leaf_, PImage branch_) {
+  Tree(PVector location_, int size_, String leafImageURL_, String branchImageURL_) {
     location = location_;
     size = size_;
     thickness = size/10;
-    leaf = leaf_;
-    branch = branch_;
+    //leaf = leaf_;
+    //branch = branch_;
     lean = random(0.30, 7.0);
     
     rotationFactor = random(20.0, 65.0); // How much should the branches move when the mouse moves
+    
+    leaf = requestImage(leafImageURL_);
+    branch = requestImage(branchImageURL_);    
   }
   
 
@@ -59,20 +63,23 @@ class Tree {
   }  
   
   void render() {
-
-    // Let's pick an angle 0 to 90 degrees based on the mouse position
-    float a = (mouseX / (float) width) * rotationFactor;
-    // Convert it to radians
-    theta = radians(a);    
+    if (leaf.width == 0 && branch.width == 0) {
+    } else {
     
-    resetMatrix();    
-    translate(location.x,location.y);
-    
-    // Draw a line 120 pixels
-    image(branch, 0, 0, thickness, -size);
-    // Move to the end of that line
-    translate(0,-size);
-    // Start the recursive branching!
-    branch(size, thickness);
+      // Let's pick an angle 0 to 90 degrees based on the mouse position
+      float a = (mouseX / (float) width) * rotationFactor;
+      // Convert it to radians
+      theta = radians(a);    
+      
+      resetMatrix();    
+      translate(location.x,location.y);
+      
+      // Draw a line 120 pixels
+      image(branch, 0, 0, thickness, -size);
+      // Move to the end of that line
+      translate(0,-size);
+      // Start the recursive branching!
+      branch(size, thickness);
+    }
   }
 }
