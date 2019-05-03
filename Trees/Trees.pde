@@ -35,5 +35,5 @@ void draw() {
 }
 
 void mouseClicked() {
-  trees.add(new Tree(new PVector(mouseX,height), mouseY, leafs[int(random(0,leafs.length-1))], branches[int(random(0,branches.length-1))]));
+  trees.add(new Tree(new PVector(mouseX,height), mouseY, leafs[int(random(0,leafs.length))], branches[int(random(0,branches.length))]));
 }
