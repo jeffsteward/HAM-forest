@@ -1,4 +1,7 @@
 /**
+ * Art Forest
+ *
+ * Based on:
  * Recursive Tree
  * by Daniel Shiffman.  
  * 
@@ -37,3 +40,11 @@ void draw() {
 void mouseClicked() {
   trees.add(new Tree(new PVector(mouseX,height), mouseY, leafs[int(random(0,leafs.length))], branches[int(random(0,branches.length))]));
 }
+
+void keyPressed() {
+  // reset = cut down the forest
+  if (key == 'r') {
+    trees.clear();
+  }
+}
+    
