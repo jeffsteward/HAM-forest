@@ -3,18 +3,19 @@ class Tree {
   int size; 
   float thickness;
   PImage leaf;
+  String leafImageURL;
   PImage branch;
+  String branchImageURL;
   float theta;             // The angle of each branch
   float rotationFactor;    // Controls how far the branches spread apart [0..90]
   float lean;              // Controls the direction of lean [0.0..10.0]
   
-  //Tree(PVector location_, int size_, PImage leaf_, PImage branch_) {
   Tree(PVector location_, int size_, String leafImageURL_, String branchImageURL_) {
     location = location_;
     size = size_;
     thickness = size/10;
-    //leaf = leaf_;
-    //branch = branch_;
+    leafImageURL = leafImageURL_;
+    branchImageURL = branchImageURL_;
     lean = random(0.30, 7.0);
     
     rotationFactor = random(20.0, 65.0); // How much should the branches move when the mouse moves
@@ -64,6 +65,7 @@ class Tree {
   
   void render() {
     if (leaf.width == 0 && branch.width == 0) {
+    } else if (leaf.width == -1 || branch.width == -1) {
     } else {
     
       // Let's pick an angle 0 to 90 degrees based on the mouse position
