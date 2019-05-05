@@ -18,7 +18,7 @@ class Tree {
     branchImageURL = branchImageURL_;
     lean = random(0.30, 7.0);
     
-    rotationFactor = random(20.0, 65.0); // How much should the branches move when the mouse moves
+    rotationFactor = random(30.0, 65.0); // How much should the branches move when the mouse moves
     
     leaf = requestImage(leafImageURL_);
     branch = requestImage(branchImageURL_);    
@@ -69,7 +69,7 @@ class Tree {
     } else {
     
       // Let's pick an angle 0 to 90 degrees based on the mouse position
-      float a = (mouseX / (float) width) * rotationFactor;
+      float a = (map(mouseX,0,width,500.0,600.0) / (float) width) * 90f;
       // Convert it to radians
       theta = radians(a);    
       
