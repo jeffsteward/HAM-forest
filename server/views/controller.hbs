@@ -1,0 +1,23 @@
+<script>
+    let socket = io('/controller');
+
+    const leafs = ["https://ids.lib.harvard.edu/ids/iiif/423290977/445,946,105,66/full/0/default.jpg",
+                    "https://ids.lib.harvard.edu/ids/iiif/423290977/1090,2302,112,191/full/0/default.jpg",
+                    "https://ids.lib.harvard.edu/ids/iiif/43182690/476,668,162,141/full/0/default.jpg"];
+
+    const branches = ["https://ids.lib.harvard.edu/ids/iiif/423290977/802,2165,46,254/full/0/default.jpg",
+                        "https://ids.lib.harvard.edu/ids/iiif/423290977/1261,315,59,486/full/0/default.jpg",
+                        "https://ids.lib.harvard.edu/ids/iiif/43182690/433,1487,46,243/full/0/default.jpg"];
+
+    function spawn() {
+        let data = {
+            'leaf': leafs[Math.floor(Math.random() * Math.floor(4))],
+            'branch': branches[Math.floor(Math.random() * Math.floor(4))]
+        };
+        socket.emit('create-tree', data);
+    }
+</script>
+
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+<button onclick="spawn()">Spawn</button>
