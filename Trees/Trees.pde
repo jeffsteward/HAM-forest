@@ -1,3 +1,5 @@
+import websockets.*;
+
 /**
  * Art Forest
  *
@@ -19,10 +21,14 @@ String[] branches = {"https://ids.lib.harvard.edu/ids/iiif/423290977/802,2165,46
                       "https://ids.lib.harvard.edu/ids/iiif/43182690/433,1487,46,243/full/0/default.jpg"};
 ArrayList<Tree> trees = new ArrayList<Tree>();
 
+WebsocketClient wsc;
+
 void setup() {
   //size(640, 360);
   fullScreen(2);
-
+  
+  wsc = new WebsocketClient(this, "ws://localhost:3000/socket.io/?EIO=3&transport=websocket");
+  
   trees.add(new Tree(new PVector(width/4,height), 320, leafs[0], branches[0]));
 }
 
@@ -37,14 +43,29 @@ void draw() {
   }
 }
 
-void mouseClicked() {
+void createTree() {
   trees.add(new Tree(new PVector(mouseX,height), mouseY, leafs[int(random(0,leafs.length))], branches[int(random(0,branches.length))]));
+  println(trees.size());
+  wsc.sendMessage("42[\"message\",{\"x\":" + mouseX + ",\"y\":" + mouseY + "}]");  
+}
+
+void clearTheForest() {
+}
+
+void mouseClicked() {
+  createTree();
 }
 
 void keyPressed() {
   // reset = cut down the forest
   if (key == 'r') {
     trees.clear();
+  } else if (key == 'c') {
+    createTree();
   }
+}
+
+void webSocketEvent(String msg){
+ println(msg);
 }
     
