@@ -1,6 +1,28 @@
 <script>
     let socket = io('/controller');
 
+    let object = {
+        manifest: '',
+        manifestUri: '',
+        imageInfoUri: '',
+        imageID: '',
+        scaleFactor: 0
+    };
+
+    let leaf = {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+    };
+
+    let branch = {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+    };
+
     let currentObjectIndex = 0;
 
     let annotationSVG;
@@ -11,27 +33,27 @@
                         'https://iiif.harvardartmuseums.org/manifests/object/312569',
                         'https://iiif.harvardartmuseums.org/manifests/object/303397',
                         'https://iiif.harvardartmuseums.org/manifests/object/95035',
+                        'https://iiif.harvardartmuseums.org/manifests/object/210644',
+                        'https://iiif.harvardartmuseums.org/manifests/object/316760',
+                        'https://iiif.harvardartmuseums.org/manifests/object/216599',
+                        'https://iiif.harvardartmuseums.org/manifests/object/295433',
                         'https://iiif.harvardartmuseums.org/manifests/object/320567'];
 
-    const leafs = ["https://ids.lib.harvard.edu/ids/iiif/423290977/445,946,105,66/full/0/default.jpg",
-                    "https://ids.lib.harvard.edu/ids/iiif/423290977/1090,2302,112,191/full/0/default.jpg",
-                    "https://ids.lib.harvard.edu/ids/iiif/43182690/476,668,162,141/full/0/default.jpg"];
-
-    const branches = ["https://ids.lib.harvard.edu/ids/iiif/423290977/802,2165,46,254/full/0/default.jpg",
-                        "https://ids.lib.harvard.edu/ids/iiif/423290977/1261,315,59,486/full/0/default.jpg",
-                        "https://ids.lib.harvard.edu/ids/iiif/43182690/433,1487,46,243/full/0/default.jpg",
-                        "https://ids.lib.harvard.edu/ids/iiif/10466656/2043,344,105,580/full/0/default.jpg"];
-
     function spawn() {
-        let data = {
-            'leaf': leafs[Math.floor(Math.random() * Math.floor(4))],
-            'branch': branches[Math.floor(Math.random() * Math.floor(5))]
-        };
+        let data = getSelectedRegions();
         socket.emit('create-tree', data);
     }
 
     function getSelectedRegions() {
-        //d3.select("#leaf").node().getBBox()
+        let leafBB = d3.select("#leaf").node().getBBox();
+        let leafImageFragment =  Math.round(leafBB.x * object.scaleFactor) + ',' + Math.round(leafBB.y * object.scaleFactor) + ',' + Math.round(leafBB.width * object.scaleFactor) + ',' + Math.round(leafBB.height * object.scaleFactor);    
+        let leafImageURL = object.imageID + '/' + leafImageFragment + '/full/0/default.jpg';
+
+        let branchBB = d3.select("#branch").node().getBBox();
+        let branchImageFragment =  Math.round(branchBB.x * object.scaleFactor) + ',' + Math.round(branchBB.y * object.scaleFactor) + ',' + Math.round(branchBB.width * object.scaleFactor) + ',' + Math.round(branchBB.height * object.scaleFactor);    
+        let branchImageURL = object.imageID + '/' + branchImageFragment + '/full/0/default.jpg';
+        
+        return {leaf: leafImageURL, branch: branchImageURL};
     }
 
     function next() {
@@ -50,17 +72,22 @@
         showImage(objects[currentObjectIndex]);
     }
 
-    function showImage(manifest) {
-        manifesto.loadManifest(manifest).then((manifest) => {
+    function showImage(manifestUri) {
+        manifesto.loadManifest(manifestUri).then((manifest) => {
+            object.manifestUri = manifestUri
+            object.manifest = manifest;
+
             let m = manifesto.create(manifest);
             let s = m.getSequences()[0];
             let c = s.getCanvasByIndex(0);
             let i = c.getImages()[0];
 
-            imageInfoUri = i.getResource().getServices()[0].getInfoUri();
-            imageID = i.getResource().getServices()[0].getProperty('@id');
+            object.imageInfoUri = i.getResource().getServices()[0].getInfoUri();
+            object.imageID = i.getResource().getServices()[0].getProperty('@id');
             
-            let imageURL = imageID + '/full/!500,500/0/default.jpg';
+            object.scaleFactor = i.getResource().getWidth()/500;
+
+            let imageURL = object.imageID + '/full/500,/0/default.jpg';
             let targetImage = $('#target')
                                 .attr('src',imageURL)
                                 .on('load', initializeAnnotations);
