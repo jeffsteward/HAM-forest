@@ -7,11 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/forest', function(req, res, next) {
-  res.render('forest', { title: 'Art Forest | The Forest' });
+  res.render('forest', { layout: 'forest-layout', title: 'Art Forest | The Forest' });
 });
 
 router.get('/controller', function(req, res, next) {
-  res.render('controller', { title: 'Controller | The Forest' });
+  res.render('controller', { layout: 'controller-layout', title: 'Controller | The Forest' });
 });
 
 module.exports = router;
