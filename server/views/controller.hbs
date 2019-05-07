@@ -113,7 +113,10 @@
                         .attr('width', 50)
                         .attr('height', 50)
                         .attr('id', 'leaf')
-                        .call(drag.on('drag', dragged));
+                        .call(drag
+                                .on('start', dragStarted)
+                                .on('end', dragEnded)
+                                .on('drag', dragged));
 
         annotationSVG.append('rect')
                         .attr('stroke', 'brown')
@@ -124,16 +127,27 @@
                         .attr('width', 25)
                         .attr('height', 150)
                         .attr('id', 'branch')
-                        .call(drag.on('drag', dragged));
+                        .call(drag
+                                .on('start', dragStarted)
+                                .on('end', dragEnded)
+                                .on('drag', dragged));
     }
 
     function dragged() {
-        //d3.event.subject.x = d3.event.x;
-        //d3.event.subject.x = d3.event.y;
+        d3.select(this)
+            .attr('x', (d3.event.x - x0))
+            .attr('y', (d3.event.y - y0));
+    }
+
+    let x0 = 0;
+    let y0 = 0;
+    function dragStarted() {
+        x0 = d3.event.x - d3.select(this).node().getBBox().x;
+        y0 = d3.event.y - d3.select(this).node().getBBox().y;
+    }
+
+    function dragEnded() {
         
-        d3.select(this).raise()
-            .attr('x', d3.event.x)
-            .attr('y', d3.event.y);
     }
 
     $(document).ready(() => {
