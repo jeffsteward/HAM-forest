@@ -14,7 +14,10 @@
         objectID: 0,
         scaleFactor: 0,
         leaf: '',
-        branch: ''
+        leafImageFragment: '',
+        branch: '',
+        branchImageFragment: '',
+        timestamp: 0
     };
 
     let annotations = [
@@ -40,6 +43,7 @@
     }
 
     function spawn() {
+        object.timestamp = Date.now();
         socket.emit('create-tree', object);
     }
 
@@ -49,12 +53,12 @@
 
     function updateObject() {
         let leafBB = d3.select("#leaf").node().getBBox();
-        let leafImageFragment =  Math.round(leafBB.x * object.scaleFactor) + ',' + Math.round(leafBB.y * object.scaleFactor) + ',' + Math.round(leafBB.width * object.scaleFactor) + ',' + Math.round(leafBB.height * object.scaleFactor);    
-        object.leaf = object.imageID + '/' + leafImageFragment + '/full/0/default.jpg';
+        object.leafImageFragment =  Math.round(leafBB.x * object.scaleFactor) + ',' + Math.round(leafBB.y * object.scaleFactor) + ',' + Math.round(leafBB.width * object.scaleFactor) + ',' + Math.round(leafBB.height * object.scaleFactor);    
+        object.leaf = object.imageID + '/' + object.leafImageFragment + '/full/0/default.jpg';
 
         let branchBB = d3.select("#branch").node().getBBox();
-        let branchImageFragment =  Math.round(branchBB.x * object.scaleFactor) + ',' + Math.round(branchBB.y * object.scaleFactor) + ',' + Math.round(branchBB.width * object.scaleFactor) + ',' + Math.round(branchBB.height * object.scaleFactor);    
-        object.branch = object.imageID + '/' + branchImageFragment + '/full/0/default.jpg';
+        object.branchImageFragment =  Math.round(branchBB.x * object.scaleFactor) + ',' + Math.round(branchBB.y * object.scaleFactor) + ',' + Math.round(branchBB.width * object.scaleFactor) + ',' + Math.round(branchBB.height * object.scaleFactor);    
+        object.branch = object.imageID + '/' + object.branchImageFragment + '/full/0/default.jpg';
     }
 
     function next() {
@@ -204,6 +208,6 @@
     <ol>
         <li>Use the "Next" and "Previous" buttons to choose an image.</li>
         <li>Drag the square and rectangle around to choose leaf and branch patterns.</li>
-        <li>Click "Cast it..." to see it grow on the big screen.</li>
+        <li>Click "Cast it..." to see it grow on the big screen. Your patience will be rewarded.</li>
     </ol>
 </section>
