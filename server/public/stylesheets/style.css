@@ -36,3 +36,8 @@ button {
   font-size: 120%; 
   font-weight: bold;
 }
+
+#instructions {
+  font-size: 130%;
+  margin-top:50px;
+}
