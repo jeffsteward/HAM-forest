@@ -3,7 +3,8 @@ class Tree {
         this.ready = false;
 
         this.position = createVector(x, y);
-        this.size = size;
+        this.size = 0;
+        this.fullSize = size;
         this.thickness = size/10;
         this.leafImageURL = data.leaf;
         this.branchImageURL = data.branch;
@@ -22,7 +23,15 @@ class Tree {
                 this.branch = img;
 
                 loadJSON('/data/object/' + data.objectID, (objectData) => {
-                    this.maximumAge = objectData.totalpageviews*15;
+                    if (objectData.totalpageviews < 250) {
+                        this.maximumAge = objectData.totalpageviews*50;
+                    } else if (objectData.totalpageviews < 500) {
+                        this.maximumAge = objectData.totalpageviews*20;
+                    } else if (objectData.totalpageviews < 1000) {
+                        this.maximumAge = objectData.totalpageviews*10;
+                    } else {
+                        this.maximumAge = objectData.totalpageviews;
+                    }
                     this.ready = true;
                 });
             });
@@ -74,11 +83,16 @@ class Tree {
         this.lifeSpan +=0.5;
         
         // This controls the pace of spread
-        this.angleOfMovement = (map(this.lifeSpan*3.5,0,width,400.0,600.0) / width) * 80.0;
+        this.angleOfMovement = (map(this.lifeSpan,0,width,400.0,600.0) / width) * 90.0;
  
         if (this.lifeSpan > this.maximumAge) {
             this.size -=0.85;
             this.thickness = this.size/10;
+        } else {
+            if (this.size < this.fullSize) {
+                this.size +=0.85;
+                this.thickness = this.size/10;
+            }
         }
 
         this.isAlive = (this.size > 1);
