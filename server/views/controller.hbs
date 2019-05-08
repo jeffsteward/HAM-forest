@@ -170,20 +170,22 @@
     });
 </script>
 
-<h1>{{title}}</h1>
+<h1>Plant a tree in the art forest</h1>
 
-<section id='controls'>
-    <button onclick='spawn()'>Spawn</button>
-    <button onclick='previous()'>Previous</button>
-    <button onclick='next()'>Next</button>
+<section id='controls'> 
+    <h2>1. <button onclick='previous()'>&lt; Previous</button>
+    <button onclick='next()'>Next &gt;</button></h2>
 
-    <button onclick='zoomAnnotation("#leaf",zoomInFactor)'>Make Leaf Bigger</button>
-    <button onclick='zoomAnnotation("#leaf",zoomOutFactor)'>Make Leaf Smaller</button>
+    <h2>2. <button onclick='zoomAnnotation("#leaf",zoomInFactor)'>+ Make Leaf Bigger +</button>
+    <button onclick='zoomAnnotation("#leaf",zoomOutFactor)'>- Make Leaf Smaller -</button>
 
-    <button onclick='zoomAnnotation("#branch",zoomInFactor)'>Make Branch Bigger</button>
-    <button onclick='zoomAnnotation("#branch",zoomOutFactor)'>Make Branch Smaller</button>    
-</section>
+    <button onclick='zoomAnnotation("#branch",zoomInFactor)'>+ Make Branch Bigger +</button>
+    <button onclick='zoomAnnotation("#branch",zoomOutFactor)'>- Make Branch Smaller -</button></h2>
+
 
 <section id='editor'>
     <img src='' id='target'>
 </section>    
+
+    <h2>3. <button onclick='spawn()'>Cast it to the Wind</button></h2>
+</section>
