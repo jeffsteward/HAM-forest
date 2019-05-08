@@ -1,5 +1,5 @@
 class Tree {
-    constructor(x, y, size, leafImageURL, branchImageURL) {
+    constructor(x, y, size, leafImageURL, branchImageURL, age) {
         this.ready = false;
 
         this.position = createVector(x, y);
@@ -12,7 +12,7 @@ class Tree {
         this.theta = 0.0;
         this.angleOfMovement = 0.0;
         this.lifeSpan = 0;
-        this.maximumAge = 200;
+        this.maximumAge = age;
         this.isAlive = false;
 
         loadImage(this.leafImageURL, img => {
@@ -71,10 +71,10 @@ class Tree {
         this.lifeSpan +=0.5;
         
         // This controls the pace of spread
-        this.angleOfMovement = (map(this.lifeSpan*7.5,0,width,400.0,600.0) / width) * 90.0;
+        this.angleOfMovement = (map(this.lifeSpan*3.5,0,width,400.0,600.0) / width) * 90.0;
  
         if (this.lifeSpan > this.maximumAge) {
-            this.size -=1;
+            this.size -=0.85;
             this.thickness = this.size/10;
         }
 
