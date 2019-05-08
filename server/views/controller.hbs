@@ -82,9 +82,9 @@
             object.imageInfoUri = i.getResource().getServices()[0].getInfoUri();
             object.imageID = i.getResource().getServices()[0].getProperty('@id');
             
-            object.scaleFactor = i.getResource().getWidth()/500;
+            object.scaleFactor = i.getResource().getWidth()/600;
 
-            let imageURL = object.imageID + '/full/500,/0/default.jpg';
+            let imageURL = object.imageID + '/full/600,/0/default.jpg';
             let targetImage = $('#target')
                                 .attr('src',imageURL)
                                 .on('load', initializeAnnotations);
