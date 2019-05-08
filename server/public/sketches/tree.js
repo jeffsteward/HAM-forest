@@ -1,18 +1,18 @@
 class Tree {
-    constructor(x, y, size, leafImageURL, branchImageURL, age) {
+    constructor(x, y, size, data) {
         this.ready = false;
 
         this.position = createVector(x, y);
         this.size = size;
         this.thickness = size/10;
-        this.leafImageURL = leafImageURL;
-        this.branchImageURL = branchImageURL;
+        this.leafImageURL = data.leaf;
+        this.branchImageURL = data.branch;
         this.lean = random(0.30, 7.0);
         this.rotationFactor = random(30.0, 65.0);
         this.theta = 0.0;
         this.angleOfMovement = 0.0;
         this.lifeSpan = 0;
-        this.maximumAge = age;
+        this.maximumAge = 0;
         this.isAlive = false;
 
         loadImage(this.leafImageURL, img => {
@@ -21,7 +21,10 @@ class Tree {
             loadImage(this.branchImageURL, img => {
                 this.branch = img;
 
-                this.ready = true;
+                loadJSON('/data/object/' + data.objectID, (objectData) => {
+                    this.maximumAge = objectData.totalpageviews;
+                    this.ready = true;
+                });
             });
         });
     }

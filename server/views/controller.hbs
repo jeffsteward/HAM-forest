@@ -11,7 +11,10 @@
         manifestUri: '',
         imageInfoUri: '',
         imageID: '',
-        scaleFactor: 0
+        objectID: 0,
+        scaleFactor: 0,
+        leaf: '',
+        branch: ''
     };
 
     let annotations = [
@@ -37,20 +40,21 @@
     }
 
     function spawn() {
-        let data = getSelectedRegions();
-        socket.emit('create-tree', data);
+        socket.emit('create-tree', object);
     }
 
-    function getSelectedRegions() {
+    function getObjectIdFromManifestUri(manifestUri) {
+        return parseInt(manifestUri.replace('https://iiif.harvardartmuseums.org/manifests/object/',''));
+    }
+
+    function updateObject() {
         let leafBB = d3.select("#leaf").node().getBBox();
         let leafImageFragment =  Math.round(leafBB.x * object.scaleFactor) + ',' + Math.round(leafBB.y * object.scaleFactor) + ',' + Math.round(leafBB.width * object.scaleFactor) + ',' + Math.round(leafBB.height * object.scaleFactor);    
-        let leafImageURL = object.imageID + '/' + leafImageFragment + '/full/0/default.jpg';
+        object.leaf = object.imageID + '/' + leafImageFragment + '/full/0/default.jpg';
 
         let branchBB = d3.select("#branch").node().getBBox();
         let branchImageFragment =  Math.round(branchBB.x * object.scaleFactor) + ',' + Math.round(branchBB.y * object.scaleFactor) + ',' + Math.round(branchBB.width * object.scaleFactor) + ',' + Math.round(branchBB.height * object.scaleFactor);    
-        let branchImageURL = object.imageID + '/' + branchImageFragment + '/full/0/default.jpg';
-        
-        return {leaf: leafImageURL, branch: branchImageURL};
+        object.branch = object.imageID + '/' + branchImageFragment + '/full/0/default.jpg';
     }
 
     function next() {
@@ -78,6 +82,8 @@
             let s = m.getSequences()[0];
             let c = s.getCanvasByIndex(0);
             let i = c.getImages()[0];
+
+            object.objectID = getObjectIdFromManifestUri(manifestUri);
 
             object.imageInfoUri = i.getResource().getServices()[0].getInfoUri();
             object.imageID = i.getResource().getServices()[0].getProperty('@id');
@@ -119,6 +125,8 @@
             // find out if the boxes are out of bounds
             // and move them in
         }
+
+        updateObject();
     }
 
     function updateAnnotation(annotation) {
@@ -141,6 +149,7 @@
                 .attr('height', h * factor);
     
             updateAnnotation(annotation);
+            updateObject();
         }
     }
 
@@ -159,6 +168,7 @@
 
     function dragEnded() {
         updateAnnotation(this);
+        updateObject();
     }
 
     $(document).ready(() => {

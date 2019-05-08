@@ -6,8 +6,6 @@ function setup() {
     socket = io('/forest');
     socket.on("create-tree", createTree);
 
-    if (getUrlVar("age") > 0) {age = getUrlVar("age");}
-
     createCanvas(windowWidth, windowHeight);
 }
 
@@ -22,11 +20,12 @@ function draw() {
     }
 }
 
-function drawTree(leaf, branch) {
-    trees.push(new Tree(random(0,width), height, random(100, height/1.70), leaf, branch, age));
+function drawTree(data) {
+    trees.push(new Tree(random(0,width), height, random(100, height/1.70), data));
 }
 
 function createTree(data) {
-    console.log(data);
-    drawTree(data.leaf, data.branch);
+    // incoming data looks like
+    //   {leaf: "IMAGE_URL", branch: "IMAGE_URL", objectID: 000000}
+    drawTree(data);
 }

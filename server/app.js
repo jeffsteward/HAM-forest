@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+var dataRouter = require('./routes/data');
 
 var app = express();
 var server = require('http').Server(app);
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/data', dataRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,7 +60,7 @@ controllerSockets.on('connection', function(socket) {
   });
 
   socket.on('create-tree', function(data) {
-    forestSockets.emit('create-tree', {'leaf':data.leaf, 'branch':data.branch});
+    forestSockets.emit('create-tree', {'leaf':data.leaf, 'branch':data.branch, 'objectID':data.objectID});
   });
 });
 
