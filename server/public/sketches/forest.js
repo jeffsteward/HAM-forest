@@ -12,12 +12,15 @@ function draw() {
     background(0);
 
     for (let tree of trees) {
-        tree.render();
+        tree.update();
+        if (tree.isAlive) {
+            tree.render();
+        }
     }
 }
 
 function drawTree(leaf, branch) {
-    trees.push(new Tree(random(0,width), height, random(100, height/1.5), leaf, branch));
+    trees.push(new Tree(random(0,width), height, random(100, height/1.70), leaf, branch));
 }
 
 function createTree(data) {

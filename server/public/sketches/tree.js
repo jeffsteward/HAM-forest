@@ -10,6 +10,10 @@ class Tree {
         this.lean = random(0.30, 7.0);
         this.rotationFactor = random(30.0, 65.0);
         this.theta = 0.0;
+        this.angleOfMovement = 0.0;
+        this.lifeSpan = 0;
+        this.maximumAge = 200;
+        this.isAlive = false;
 
         loadImage(this.leafImageURL, img => {
             this.leaf = img;
@@ -37,12 +41,13 @@ class Tree {
           this.createBranch(h, t);       // Ok, now call myself to draw two new branches!!
           pop();     // Whenever we get back here, we "pop" in order to restore the previous matrix state
           
-          push();
-          rotate(this.theta);
-          translate(0, -h);
-          image(this.leaf, 0, 0, 20, 20);
-          pop();
-          
+          if (h < (this.size*0.66)*0.66) {
+            push();
+            rotate(this.theta);
+            translate(0, -h);
+            image(this.leaf, 0, 0, 2*this.thickness, 2*this.thickness);
+            pop();
+          }          
           
           // Repeat the same thing, only branch off to the "left" this time!
           push();
@@ -52,20 +57,38 @@ class Tree {
           this.createBranch(h, t);
           pop();      
           
-          push();
-          rotate(-this.theta/this.lean);
-          translate(0, -h);
-          image(this.leaf, 0,0,20, 20);
-          pop();
+          if (h < (this.size*0.66)*0.66) {
+            push();
+            rotate(-this.theta/this.lean);
+            translate(0, -h);
+            image(this.leaf, 0, 0, 1.25*this.thickness, 1.25*this.thickness);
+            pop();
+          }
         }
     }  
 
+    update() {
+        this.lifeSpan +=0.5;
+        
+        // This controls the pace of spread
+        this.angleOfMovement = (map(this.lifeSpan*7.5,0,width,400.0,600.0) / width) * 90.0;
+ 
+        if (this.lifeSpan > this.maximumAge) {
+            this.size -=1;
+            this.thickness = this.size/10;
+        }
+
+        this.isAlive = (this.size > 1);
+    }
+
     render() {
         if (this.ready) {
+            this.isAlive = true; 
+            
             // Let's pick an angle 0 to 90 degrees based on the mouse position
-            let a = (map(mouseX,0,width,500.0,600.0) / width) * 90.0;
+            // let a = (map(mouseX,0,width,500.0,600.0) / width) * 90.0;
             // Convert it to radians
-            this.theta = radians(a);    
+            this.theta = radians(this.angleOfMovement);    
             
             resetMatrix();    
             translate(this.position.x,this.position.y);
