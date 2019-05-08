@@ -88,9 +88,9 @@
             object.imageInfoUri = i.getResource().getServices()[0].getInfoUri();
             object.imageID = i.getResource().getServices()[0].getProperty('@id');
             
-            object.scaleFactor = i.getResource().getWidth()/600;
+            object.scaleFactor = i.getResource().getHeight()/700;
 
-            let imageURL = object.imageID + '/full/600,/0/default.jpg';
+            let imageURL = object.imageID + '/full/,700/0/default.jpg';
             let targetImage = $('#target')
                                 .attr('src',imageURL)
                                 .on('load', initializeAnnotations);
@@ -183,19 +183,18 @@
 <h1>Plant a tree in the art forest</h1>
 
 <section id='controls'> 
-    <h2>1. <button onclick='previous()'>&lt; Previous</button>
-    <button onclick='next()'>Next &gt;</button></h2>
+    <h1><button onclick='previous()'>&lt; Previous Seedling</button>
+    <button onclick='next()'>Next Seedling &gt;</button></h1>
 
-    <h2>2. <button onclick='zoomAnnotation("#leaf",zoomInFactor)'>+ Make Leaf Bigger +</button>
-    <button onclick='zoomAnnotation("#leaf",zoomOutFactor)'>- Make Leaf Smaller -</button>
-
-    <button onclick='zoomAnnotation("#branch",zoomInFactor)'>+ Make Branch Bigger +</button>
-    <button onclick='zoomAnnotation("#branch",zoomOutFactor)'>- Make Branch Smaller -</button></h2>
-
+    <h1><button onclick='zoomAnnotation("#leaf",zoomInFactor)'>↑ Bigger Leaf</button>
+    <button onclick='zoomAnnotation("#leaf",zoomOutFactor)'>Smaller Leaf ↓</button>
+    +
+    <button onclick='zoomAnnotation("#branch",zoomInFactor)'>↑ Bigger Branch</button>
+    <button onclick='zoomAnnotation("#branch",zoomOutFactor)'>Smaller Branch ↓</button></h1>
 
 <section id='editor'>
     <img src='' id='target'>
 </section>    
 
-    <h2>3. <button onclick='spawn()'>Cast it to the Wind</button></h2>
+    <h1><button onclick='spawn()'>Cast it to the Wind ⭈</button></h1>
 </section>

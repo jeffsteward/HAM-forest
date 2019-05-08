@@ -9,7 +9,7 @@ a {
 
 #editor {
   min-width: 520px;
-  min-height: 520px;
+  min-height: 700px;
 }
 
 #annotations {
@@ -23,4 +23,16 @@ a {
 button {
   padding: 10px;
   border: 1px;  
+}
+
+#controller {
+  background: black;
+  color: white;
+
+}
+
+#controls button {
+  padding: 20px;
+  font-size: 120%; 
+  font-weight: bold;
 }
