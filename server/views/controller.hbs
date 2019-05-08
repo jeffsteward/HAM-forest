@@ -2,6 +2,10 @@
     let socket = io('/controller');
     let drag = d3.drag();
 
+    let collection = null;
+    let collectionUri = 'https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top';
+    let currentManifestIndex = 0;
+
     let object = {
         manifest: '',
         manifestUri: '',
@@ -15,24 +19,22 @@
         {name: 'branch', color: 'red', x: 0, y: 0, width: 25, height: 150}
     ];
 
-    let currentObjectIndex = 0;
-
     let annotationSVG;
 
     let zoomInFactor = 1.15;
     let zoomOutFactor = 0.85;
 
-    const objects = ['https://iiif.harvardartmuseums.org/manifests/object/6772',
-                        'https://iiif.harvardartmuseums.org/manifests/object/256363',
-                        'https://iiif.harvardartmuseums.org/manifests/object/196997',
-                        'https://iiif.harvardartmuseums.org/manifests/object/312569',
-                        'https://iiif.harvardartmuseums.org/manifests/object/303397',
-                        'https://iiif.harvardartmuseums.org/manifests/object/95035',
-                        'https://iiif.harvardartmuseums.org/manifests/object/210644',
-                        'https://iiif.harvardartmuseums.org/manifests/object/316760',
-                        'https://iiif.harvardartmuseums.org/manifests/object/216599',
-                        'https://iiif.harvardartmuseums.org/manifests/object/295433',
-                        'https://iiif.harvardartmuseums.org/manifests/object/320567'];
+    function getCollection() {
+        manifesto.loadManifest(collectionUri).then((manifest) => {
+            let c = manifesto.create(manifest);
+            if (c.isCollection()) {
+                collection = c;
+                if (collection.getManifests().length > 0) {
+                    showImage(collection.getManifests()[currentManifestIndex].getProperty('id'));
+                }
+            }
+        });
+    }
 
     function spawn() {
         let data = getSelectedRegions();
@@ -52,19 +54,19 @@
     }
 
     function next() {
-        currentObjectIndex +=1;
-        if (currentObjectIndex >= objects.length) {
-            currentObjectIndex = 0;
+        currentManifestIndex +=1;
+        if (currentManifestIndex >= collection.getManifests().length) {
+            currentManifestIndex = 0;
         }
-        showImage(objects[currentObjectIndex]);
+        showImage(collection.getManifests()[currentManifestIndex].getProperty('id'));
     }
 
     function previous() {
-        currentObjectIndex -=1;
-        if (currentObjectIndex < 0) {
-            currentObjectIndex = objects.length - 1;
+        currentManifestIndex -=1;
+        if (currentManifestIndex < 0) {
+            currentManifestIndex = collection.getManifests().length - 1;
         }
-        showImage(objects[currentObjectIndex]);
+        showImage(collection.getManifests()[currentManifestIndex].getProperty('id'));
     }
 
     function showImage(manifestUri) {
@@ -160,11 +162,11 @@
     }
 
     $(document).ready(() => {
-        showImage(objects[currentObjectIndex]);
-
         annotationSVG = d3.select('#editor')
                             .append('svg')
                             .attr('id', 'annotations');
+        
+        getCollection();
     });
 </script>
 
