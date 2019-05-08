@@ -22,7 +22,7 @@ class Tree {
                 this.branch = img;
 
                 loadJSON('/data/object/' + data.objectID, (objectData) => {
-                    this.maximumAge = objectData.totalpageviews;
+                    this.maximumAge = objectData.totalpageviews*15;
                     this.ready = true;
                 });
             });
@@ -74,7 +74,7 @@ class Tree {
         this.lifeSpan +=0.5;
         
         // This controls the pace of spread
-        this.angleOfMovement = (map(this.lifeSpan*3.5,0,width,400.0,600.0) / width) * 90.0;
+        this.angleOfMovement = (map(this.lifeSpan*3.5,0,width,400.0,600.0) / width) * 80.0;
  
         if (this.lifeSpan > this.maximumAge) {
             this.size -=0.85;
