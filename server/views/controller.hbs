@@ -19,6 +19,9 @@
 
     let annotationSVG;
 
+    let zoomInFactor = 1.15;
+    let zoomOutFactor = 0.85;
+
     const objects = ['https://iiif.harvardartmuseums.org/manifests/object/6772',
                         'https://iiif.harvardartmuseums.org/manifests/object/256363',
                         'https://iiif.harvardartmuseums.org/manifests/object/196997',
@@ -126,6 +129,19 @@
         annotations[index].height = bbox.height;
     }
 
+    function zoomAnnotation(annotation, factor) {
+        let a = d3.select(annotation);
+        let w = a.attr('width');
+        let h = a.attr('height');
+
+        if ((w * factor < 100) && (w * factor > 10)) {
+            a.attr('width', w * factor)
+                .attr('height', h * factor);
+    
+            updateAnnotation(annotation);
+        }
+    }
+
     function dragged() {
         d3.select(this)
             .attr('x', (d3.event.x - x0))
@@ -158,6 +174,12 @@
     <button onclick='spawn()'>Spawn</button>
     <button onclick='previous()'>Previous</button>
     <button onclick='next()'>Next</button>
+
+    <button onclick='zoomAnnotation("#leaf",zoomInFactor)'>Make Leaf Bigger</button>
+    <button onclick='zoomAnnotation("#leaf",zoomOutFactor)'>Make Leaf Smaller</button>
+
+    <button onclick='zoomAnnotation("#branch",zoomInFactor)'>Make Branch Bigger</button>
+    <button onclick='zoomAnnotation("#branch",zoomOutFactor)'>Make Branch Smaller</button>    
 </section>
 
 <section id='editor'>
