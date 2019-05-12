@@ -3,6 +3,7 @@
     let drag = d3.drag();
 
     let collection = null;
+    let collectionUriTemplate = /https:\/\/www.harvardartmuseums.org\/profile\/(.*)\/mycollections\/([0-9]*)\/(.*)\/iiif\/top/;
     let collectionUri = 'https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top';
     let currentManifestIndex = 0;
 
@@ -208,6 +209,10 @@
                             .append('svg')
                             .attr('id', 'annotations');
         
+        let uri = getUrlVar('collection');
+        if (uri.match(collectionUriTemplate)) {
+            collectionUri = uri;
+        } 
         getCollection();
     });
 </script>
