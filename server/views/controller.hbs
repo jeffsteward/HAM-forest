@@ -126,11 +126,41 @@
                                 .on('end', dragEnded)
                                 .on('drag', dragged));
         } else { 
-            // find out if the boxes are out of bounds
-            // and move them in
+            moveAnnotationInbounds("#leaf");
+            moveAnnotationInbounds("#branch");
         }
 
         updateObject();
+    }
+
+    function moveAnnotationInbounds(annotation) {
+        // check the annotation against its parent container
+        // if it's out of bounds in any direction, move it inbounds
+        let targetImage = $('#target');
+        let a = d3.select(annotation);
+        let bbox = a.node().getBBox();
+        let x = bbox.x;
+        let y = bbox.y;
+        if ((bbox.x + bbox.width) > targetImage.width()) {
+            x = targetImage.width() - bbox.width; 
+        }
+        if (bbox.x < 0) {
+            x = 0; 
+        }
+        if ((bbox.y + bbox.height) > targetImage.height()) {
+            y = targetImage.height() - bbox.height; 
+        }
+        if (bbox.y < 0) {
+            y = 0; 
+        }
+
+        a.transition()
+            .duration(250)
+            .attr('x', x)
+            .attr('y', y)
+            .on('end', () => {
+                    updateAnnotation(annotation);
+                    updateObject();});
     }
 
     function updateAnnotation(annotation) {
@@ -151,9 +181,8 @@
         if ((w * factor < 100) && (w * factor > 10)) {
             a.attr('width', w * factor)
                 .attr('height', h * factor);
-    
-            updateAnnotation(annotation);
-            updateObject();
+            
+            moveAnnotationInbounds(annotation);
         }
     }
 
@@ -171,8 +200,7 @@
     }
 
     function dragEnded() {
-        updateAnnotation(this);
-        updateObject();
+        moveAnnotationInbounds(this);
     }
 
     $(document).ready(() => {
