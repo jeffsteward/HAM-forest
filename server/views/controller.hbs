@@ -93,9 +93,13 @@
             object.imageInfoUri = i.getResource().getServices()[0].getInfoUri();
             object.imageID = i.getResource().getServices()[0].getProperty('@id');
             
-            object.scaleFactor = i.getResource().getHeight()/700;
+            let imageHeight = 700;
+            if (i.getResource().getHeight() < 700) {
+                imageHeight = i.getResource().getHeight();
+            }
+            object.scaleFactor = i.getResource().getHeight()/imageHeight;
 
-            let imageURL = object.imageID + '/full/,700/0/default.jpg';
+            let imageURL = object.imageID + '/full/,' + imageHeight + '/0/default.jpg';
             let targetImage = $('#target')
                                 .attr('src',imageURL)
                                 .on('load', initializeAnnotations);
