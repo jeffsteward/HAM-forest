@@ -28,10 +28,10 @@ button {
 #controller {
   background: black;
   color: white;
-
 }
 
 #controls button {
+  background-color: rgb(223, 223, 223);
   padding: 20px;
   font-size: 120%; 
   font-weight: bold;
