@@ -1,10 +1,25 @@
 body {
   padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #222222;
+  margin: 0;
+  padding: 0;
+  color: #d0d0d0;
 }
 
 a {
   color: #00B7FF;
+}
+
+#mainmenu {
+  padding: 20px;
+  color: #ffffff;
+  font-size: 200%;
+}
+
+#mainmenu h1 {
+  color: #ffffff;
+  font-size: 250%;
 }
 
 #editor {
