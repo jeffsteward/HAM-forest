@@ -40,27 +40,44 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+function generateRoom() {
+  return (Math.floor(new Date() / 1000)).toString(36);
+}
+
 // socket handling
 var forestSockets = io.of('/forest');
 var controllerSockets = io.of('/controller');
 
+var forests = [];
+
 forestSockets.on('connection', function(socket) {
   console.log('forest socket connected');
 
+  forestID = generateRoom();
+
+  forests.push(forestID);
+  socket.join(forestID)
+  socket.emit('id', {'id': forestID});
+
   socket.on('disconnect', function() {
-    console.log('socket disconnect');
+    forests.splice(forests.indexOf(this), 1);
   });
 });
 
 controllerSockets.on('connection', function(socket) {
   console.log('controller socket connected');
-
+  
   socket.on('disconnet', function() {
     console.log('controller socket disconnect')
   });
 
+  socket.on('join-room', function(data) {
+    socket.join(data.forestID);
+  });
+
   socket.on('create-tree', function(data) {
-    forestSockets.emit('create-tree', {'leaf':data.leaf, 'branch':data.branch, 'objectID':data.objectID});
+    forestSockets.to(data.forestID).emit('create-tree', {'leaf':data.leaf, 'branch':data.branch, 'objectID':data.objectID});
   });
 });
 

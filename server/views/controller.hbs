@@ -3,9 +3,15 @@
     let drag = d3.drag();
 
     let collection = null;
-    let collectionUriTemplate = /https:\/\/www.harvardartmuseums.org\/profile\/(.*)\/mycollections\/([0-9]*)\/(.*)\/iiif\/top/;
-    let collectionUri = 'https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top';
+    let collectionUriTemplates = [
+        /https:\/\/www.harvardartmuseums.org\/profile\/(.*)\/mycollections\/([0-9]*)\/(.*)\/iiif\/top/,
+        /https:\/\/www.harvardartmuseums.org\/profile\/(.*)\/mycollections\/([0-9]*)\/(.*)\/public/,
+        /https:\/\/www.harvardartmuseums.org\/profile\/(.*)\/mycollections\/([0-9]*)\/(.*)/
+    ];
+    let collectionUri = '';
     let currentManifestIndex = 0;
+    
+    let forestID = 0;
 
     let object = {
         manifest: '',
@@ -45,6 +51,7 @@
 
     function spawn() {
         object.timestamp = Date.now();
+        object.forestID = forestID;
         socket.emit('create-tree', object);
     }
 
@@ -208,43 +215,71 @@
         moveAnnotationInbounds(this);
     }
 
+    function openPacket() {
+        let uri = $("#packet-name").val();
+
+        // Check the uri against a list of known uri formats
+        if (uri.match(collectionUriTemplates[0])) {
+            collectionUri = uri;
+        } else if (uri.match(collectionUriTemplates[1])) {
+            collectionUri = uri.replace("/public", "/iiif/top");
+        } else if (uri.match(collectionUriTemplates[2])) {
+            collectionUri = uri + "/iiif/top";
+        } else {
+            collectionUri = "";
+        }
+
+        if (collectionUri) {
+            getCollection();
+            $("#start").hide();
+            $("#controller").show();
+        } 
+    }
+
     $(document).ready(() => {
         annotationSVG = d3.select('#editor')
                             .append('svg')
                             .attr('id', 'annotations');
         
-        let uri = getUrlVar('collection');
-        if (uri.match(collectionUriTemplate)) {
-            collectionUri = uri;
-        } 
-        getCollection();
+        forestID = window.location.hash.replace("#","");
+        if (forestID) {
+            socket.emit("join-room", {forestID: forestID});
+        }
     });
 </script>
 
-<h1>Plant a tree in the art forest</h1>
 
-<section id='controls'> 
-    <h1><button onclick='previous()'>&lt; Previous Seedling</button>
-    <button onclick='next()'>Next Seedling &gt;</button></h1>
-
-    <h1><button onclick='zoomAnnotation("#leaf",zoomInFactor)'>↑ Bigger Leaf</button>
-    <button onclick='zoomAnnotation("#leaf",zoomOutFactor)'>Smaller Leaf ↓</button>
-    +
-    <button onclick='zoomAnnotation("#branch",zoomInFactor)'>↑ Bigger Branch</button>
-    <button onclick='zoomAnnotation("#branch",zoomOutFactor)'>Smaller Branch ↓</button></h1>
-
-    <section id='editor'>
-        <img src='' id='target'>
-    </section>    
-
-    <h1><button onclick='spawn()'>Cast it to the Wind ⭈</button></h1>
+<section id="start">
+    <h1>You are holding several packets of seeds.</h1>
+    <input value="" placeholder="Enter a packet name" id="packet-name"><button id="open-packet" onClick="openPacket()">Tear open packet</button>
 </section>
 
-<section id='instructions'>
-    <h1>Instructions</h1>
-    <ol>
-        <li>Use the "Next" and "Previous" buttons to choose an image.</li>
-        <li>Drag the square and rectangle around to choose leaf and branch patterns.</li>
-        <li>Click "Cast it..." to see it grow on the big screen. Your patience will be rewarded.</li>
-    </ol>
-</section>
+<section id="controller">
+    <h1>You are standing at the grafting bench. Seeds are scattered about.</h1>
+
+    <section id='controls'> 
+        <h1><button onclick='previous()'>&lt; Previous Seedling</button>
+        <button onclick='next()'>Next Seedling &gt;</button></h1>
+
+        <h1><button onclick='zoomAnnotation("#leaf",zoomInFactor)'>↑ Bigger Leaf</button>
+        <button onclick='zoomAnnotation("#leaf",zoomOutFactor)'>Smaller Leaf ↓</button>
+        +
+        <button onclick='zoomAnnotation("#branch",zoomInFactor)'>↑ Bigger Branch</button>
+        <button onclick='zoomAnnotation("#branch",zoomOutFactor)'>Smaller Branch ↓</button></h1>
+
+        <section id='editor'>
+            <img src='' id='target'>
+        </section>    
+
+        <h1><button onclick='spawn()'>Cast it to the Wind ⭈</button></h1>
+    </section>
+
+    <section id='instructions'>
+        <h1>Instructions</h1>
+        <ol>
+            <li>Use the "Next" and "Previous" buttons to choose an image.</li>
+            <li>Drag the square and rectangle around to choose leaf and branch patterns.</li>
+            <li>Click "Cast it..." to see it grow in the open field. Your patience will be rewarded.</li>
+        </ol>
+    </section>
+</section>  

@@ -3,7 +3,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #222222;
   margin: 0;
-  padding: 0;
+  padding: 10;
   color: #d0d0d0;
 }
 
@@ -40,9 +40,15 @@ button {
   border: 1px;  
 }
 
+#start input {
+  padding: 10px;
+  border: 1px;
+  width: 60%;
+  margin-right: 10px;
+}
+
 #controller {
-  background: black;
-  color: white;
+  display: none;
 }
 
 #controls button {
