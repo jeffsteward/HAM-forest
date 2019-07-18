@@ -27,6 +27,10 @@ a {
   min-height: 700px;
 }
 
+#target {
+  position: absolute;
+}
+
 #annotations {
   position: absolute;
 }
