@@ -39,3 +39,11 @@ function drawWelcomeMessage(data) {
     l.position(100, height/2-50);
     l.attribute("onclick", "let e=document.getElementById('launchBench');e.remove();");
 }
+
+function keyTyped() {
+    if (key === 's') {
+        trees.length = 0;
+    }
+    // prevent any default browser behavior
+    return false;
+  }
