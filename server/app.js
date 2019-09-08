@@ -9,7 +9,7 @@ var dataRouter = require('./routes/data');
 
 var app = express();
 var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var io = require('./sockets').listen(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,47 +38,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-
-function generateRoom() {
-  return (Math.floor(new Date() / 1000)).toString(36);
-}
-
-// socket handling
-var forestSockets = io.of('/forest');
-var controllerSockets = io.of('/controller');
-
-var forests = [];
-
-forestSockets.on('connection', function(socket) {
-  console.log('forest socket connected');
-
-  forestID = generateRoom();
-
-  forests.push(forestID);
-  socket.join(forestID)
-  socket.emit('id', {'id': forestID});
-
-  socket.on('disconnect', function() {
-    forests.splice(forests.indexOf(this), 1);
-  });
-});
-
-controllerSockets.on('connection', function(socket) {
-  console.log('controller socket connected');
-  
-  socket.on('disconnet', function() {
-    console.log('controller socket disconnect')
-  });
-
-  socket.on('join-room', function(data) {
-    socket.join(data.forestID);
-  });
-
-  socket.on('create-tree', function(data) {
-    forestSockets.to(data.forestID).emit('create-tree', {'leaf':data.leaf, 'branch':data.branch, 'objectID':data.objectID});
-  });
 });
 
 module.exports = {app: app, server: server};
