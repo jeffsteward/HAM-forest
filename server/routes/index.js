@@ -1,17 +1,15 @@
 var express = require('express');
 var router = express.Router();
+var narrative = require('../narrative');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Art Forest' });
+  res.render('index', { title: narrative.info.title, resources: narrative.resources.gameBoard });
 });
 
-router.get('/field', function(req, res, next) {
-  res.render('forest', { layout: 'forest-layout', title: 'Art Forest | The Open Field' });
-});
-
-router.get('/controller', function(req, res, next) {
-  res.render('controller', { layout: 'controller-layout', title: 'Art Forest | The Grafting Bench' });
+/* GET game window page. */
+router.get('/window', function(req, res, next) {
+  res.render('window', { title: narrative.info.title, resources: narrative.resources.gameWindow });
 });
 
 module.exports = router;

@@ -1,4 +1,17 @@
-<section id="mainmenu">
-    <h1>{{title}}</h1>
-    <p>West of House<br/>You are standing in an <a href="/field">open field</a> west of a white house, with a boarded front door.</p>
+<script src='/javascripts/client.board.js'></script>
+
+<section id="gameboard">
+    <div id="narrative">
+        <div id="info">
+            <h1 id="title"></h1>
+            <p id="description"></p>
+            <p id="version"></p>
+        </div>
+        <hr/>
+    </div>
+    <div id="prompt">
+       <p>&gt; <a id="action" href=""></a><span id="prompt-cursor">_&nbsp;</span></p>
+    </div>
 </section>
+
+<iframe id="gamewindow"></iframe>
