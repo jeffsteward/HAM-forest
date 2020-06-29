@@ -1,10 +1,19 @@
 const forest = (sketch) => {
 
     let canvas;
+    let soundOn = false;
+    let ambientSound;
     const trees = [];
+
+    sketch.preload = () => {
+        ambientSound = sketch.loadSound('/resources/audio/forest-ambient.mp3');
+        ambientSound.setLoop(true);
+    }
 
     sketch.setup = () => {
         socket.on("cast", sketch.createTree);
+        socket.on("play-audio", sketch.playAudio);
+        socket.on("mute-audio", sketch.muteAudio);
 
         sketch.textSize(20);
 
@@ -24,6 +33,11 @@ const forest = (sketch) => {
                 tree.render();
             }
         }
+
+        if (soundOn) {
+            sketch.fill(122);
+            sketch.text('Sound on', 10, 20);
+        }
     }
 
     sketch.drawTree = (data) => {
@@ -34,6 +48,24 @@ const forest = (sketch) => {
         // incoming data looks like
         //   {leaf: "IMAGE_URL", branch: "IMAGE_URL", objectID: 000000}
         sketch.drawTree({leaf: data.annotations[0].imageUrl, branch: data.annotations[1].imageUrl, objectID: data.objectID});
+    }
+
+    sketch.playAudio = (data) => {
+        soundOn = true;
+
+        ambientSound.play();
+        ambientSound.setVolume(1.0, 2.0);
+
+        console.log('play-audio');
+    }
+
+    sketch.muteAudio = (data) => {
+        soundOn = false;
+
+        ambientSound.setVolume(0.0, 2.0);
+        ambientSound.pause(2.0);
+
+        console.log('mute-audio');
     }
 
     sketch.keyTyped = () => {
