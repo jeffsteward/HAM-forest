@@ -1,4 +1,4 @@
-const GAMEWINDOW = 'gameWindow';
+const GAMEWINDOW = 'window';
 let game = {};
 let animation;
 let socket = io();

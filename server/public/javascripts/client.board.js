@@ -1,8 +1,9 @@
-const GAMEBOARD = 'gameBoard';
+const GAMEBOARD = 'board';
 let game;
 let animation;
 let animationTimer;
 let gamewindow;
+let prompt;
 let socket = io();
 
 document.addEventListener("DOMContentLoaded", event => { 
@@ -22,6 +23,14 @@ document.addEventListener("DOMContentLoaded", event => {
         document.getElementById('description').innerText = game.info.description;
         document.getElementById('version').innerText = `v${game.info.version}`;
 
+        //initialize the prompt box
+        prompt = document.getElementById('prompt-box');
+        prompt.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                sendCommand(prompt.value);
+            }
+        }, false);
+
         //start the narrative (after a dramatic pause)
         setTimeout(updateBoard, 3000);
     });
@@ -36,10 +45,11 @@ async function startGame() {
 
 async function takeAction(command) {
     const body = {
+        currentScene: game.scene.name,
         command: `${command}`
     };
 
-    const response = await fetch(`/game/${game.gameID}/commands/${GAMEBOARD}`, 
+    const response = await fetch(`/game/${game.gameID}/${GAMEBOARD}/commands`, 
         {
             method: 'POST', 
             headers: {
@@ -53,30 +63,54 @@ async function takeAction(command) {
 }
 
 function sendCommand(command) {
-    // record the action in the narrative box
-    let description = document.createElement('p');
-    description.innerHTML = '&gt; ' + document.getElementById('action').innerHTML;
+    if (command !== '') {
+        // record the action in the narrative box
+        let description = document.createElement('p');
+        description.innerHTML = `> ${command}`;
 
-    let narrative = document.getElementById('narrative');
-    narrative.appendChild(description);
+        let narrative = document.getElementById('narrative');
+        narrative.appendChild(description);
 
-    // take the action
-    takeAction(command).then(result => {
-        game.scene = result;
-        updateBoard();
-    });
+        // take the action
+        takeAction(command).then(result => {
+            game.scene = result;
+            updateBoard();
+        });
+    }
+}
 
+function sendMessage(message) {
+    let data = {
+        gameID: game.gameID,
+        action: message.action,
+        packet: message.packet
+    };
+    
+    socket.emit('take-action', data);
 }
 
 function updateBoard() {
+    // trigger actions
+    if (game.scene.trigger) {
+        let trigger = game.scene.trigger;
+        if (trigger.on === GAMEBOARD) {
+
+        } else {
+            sendMessage(trigger);
+        }
+    }
+
     // update the narrative
     let narrative = document.getElementById('narrative');
 
-    let description = document.createElement('p');
-    description.innerText = game.scene.description;
-    narrative.appendChild(description);
+    // add the description
+    if (game.scene.description) {
+        let description = document.createElement('p');
+        description.innerText = game.scene.description;
+        narrative.appendChild(description);
+    }
 
-    // include interactive if present
+    // add the interactive
     if (game.scene.interactive) {
         let interactiveContainer = document.createElement('p');
         let properties;
@@ -94,11 +128,10 @@ function updateBoard() {
     narrative.scrollTop = narrative.scrollHeight;
 
     // update the prompt
-    let prompt = document.getElementById('action');
-    prompt.innerText = game.scene.prompt;
-    prompt.setAttribute('href', '#');
-    prompt.setAttribute('onClick', `sendCommand('${game.scene.destination}');return false`);
-    
+    prompt.value = game.scene.prompt;
+    prompt.readOnly = (game.scene.prompt !== '');
+    prompt.focus();
+
     // update the animation
     if (animationTimer > 0) {
         clearTimeout(animationTimer);

@@ -1,32 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const narrative = require('../narrative');
-
-const model = {
-    gameID: '',
-    title: '',
-    scene: ''
-};
+const game = require('../models/game');
 
 router.post('/start/:view', function(req, res, next) {
     let view = req.params.view;
-    let game = model;
+    let newGame = game.create(view);
     
-    if (req.params.view === 'gameBoard') {
-        game.gameID = (Math.floor(new Date() / 1000)).toString(36);
-    }
-    
-    game.info = narrative.info;
-    game.scene = narrative.scenes[view].intro;
-
-    res.json(game);
+    res.json(newGame);
 });
 
-router.post('/:id/commands/:view', function(req, res, next) {
-    let view = req.params.view;
-    let command = req.body.command;
+router.post('/:id/:view/commands', function(req, res, next) {
+    let context = {
+        id: req.params.id,
+        view: req.params.view,
+        command: req.body.command
+    };
 
-    res.json(narrative.scenes[view][command]);
+    let nextScene = game.move(context);
+
+    res.json(nextScene);
 });
 
 module.exports = router;

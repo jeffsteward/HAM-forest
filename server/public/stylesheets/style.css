@@ -56,8 +56,26 @@ button {
 
 #prompt {
   border: 1px solid;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 20px 10px 20px 10px;
+}
+
+#prompt-character {
+  padding-right: 5px;
+}
+
+#prompt-box  {
+  font-size: inherit;
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+}
+
+#prompt-box br {
+  display: none;
 }
 
 #prompt-cursor {
