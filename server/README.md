@@ -34,7 +34,7 @@ Libraries included in the global scope
 
 Each game has two viewers: a game board and a game window. 
 - All games start on the game board. 
-- The majority of user interaction takes place on the game board. 
+- The majority of player interactions take place on the game board. 
 - Actions on the game board can trigger animations on the game window.
 
 **Components of the Game Board**  
@@ -47,12 +47,18 @@ Board
 --> prompt box  
 --> animations  
 
+Narrative box: contains a running history of the game story, commands, and interactions  
+Prompt box: is where the player enters commands in the format of short, imperative statements
+
 **Components of the Game Window**  
 
 Window  
 --> animation/interactive hybrid
 
 ### Narratives
+
+Narratives are a series of connected scenes. 
+
 
 ### Interactives
 
@@ -71,6 +77,10 @@ class ExampleInteractive {
 ### Animations
 
 Animations are p5 sketches that run in [instance mode](https://github.com/processing/p5.js/wiki/Global-and-instance-mode).
+
+### Triggers
+
+Triggers are a component of a command that alters the behaviour of the board and window.  
 
 ### Sockets
 
