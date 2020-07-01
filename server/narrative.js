@@ -172,7 +172,7 @@ const narrative = {
             'use grafting apparatus': {
                 name: `apparatus`,
                 description: `You pick up the grafting apparatus and get to work.`,
-                prompt: `open grow at your own risk`,
+                prompt: ``,
                 commands: {}, 
                 animation: {
                   name: ``,
@@ -202,7 +202,24 @@ const narrative = {
                   ]
                 }
             },
-            
+
+            'open small seeds': {
+              name: `apparatus3`,
+              description: `Geez, these really are small. You pick up the grafting apparatus and get to work.`,
+              prompt: ``,
+              commands: {}, 
+              animation: {
+                name: ``,
+                startDelay: 0
+              },
+              interactive: {
+                name: `Apparatus`,
+                properties: [
+                  `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
+                ]
+              }
+            },            
+
             'listen': {
               name: 'listen to the forest',
               description: 'You tilt the side of your head towards the field and let the vibrations tap gently on your eardrum.',
