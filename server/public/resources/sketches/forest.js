@@ -3,10 +3,12 @@ const forest = (sketch) => {
     let canvas;
     let soundOn = false;
     let ambientSound;
+    let ambientSoundMaxVolume = 0.3;
     const trees = [];
 
     sketch.preload = () => {
         ambientSound = sketch.loadSound('/resources/audio/forest-ambient.mp3');
+        ambientSound.setVolume(ambientSoundMaxVolume);
         ambientSound.setLoop(true);
     }
 
@@ -33,15 +35,10 @@ const forest = (sketch) => {
                 tree.render();
             }
         }
-
-        if (soundOn) {
-            sketch.fill(122);
-            sketch.text('Sound on', 10, 20);
-        }
     }
 
     sketch.drawTree = (data) => {
-        trees.push(new Tree(sketch, sketch.random(0,sketch.windowWidth), sketch.windowHeight, sketch.random(100, sketch.windowHeight/2.10), data));
+        trees.push(new Tree(sketch, sketch.random(0,sketch.windowWidth), sketch.windowHeight, sketch.random(100, sketch.windowHeight/2.10), soundOn, data));
     }
 
     sketch.createTree = (data) => {
@@ -54,9 +51,13 @@ const forest = (sketch) => {
         soundOn = true;
 
         ambientSound.play();
-        ambientSound.setVolume(1.0, 2.0);
+        ambientSound.setVolume(ambientSoundMaxVolume, 2.0);
 
-        console.log('play-audio');
+        for (let tree of trees) {
+            if (tree.isAlive) {
+                tree.setAudio(true);
+            }
+        }
     }
 
     sketch.muteAudio = (data) => {
@@ -65,7 +66,9 @@ const forest = (sketch) => {
         ambientSound.setVolume(0.0, 2.0);
         ambientSound.pause(2.0);
 
-        console.log('mute-audio');
+        for (let tree of trees) {
+            tree.setAudio(false);
+        }
     }
 
     sketch.keyTyped = () => {

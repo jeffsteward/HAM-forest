@@ -1,5 +1,5 @@
 class Tree {
-    constructor(sketch, x, y, size, data) {
+    constructor(sketch, x, y, size, soundOn, data) {
         this._sketch = sketch;
 
         this.ready = false;
@@ -17,7 +17,20 @@ class Tree {
         this.lifeSpan = 0;
         this.maximumAge = 0;
         this.isAlive = false;
+        this._sound;
+        this._soundVolume = 0.0;
 
+        let sounds = [
+            'TL41799.7.mp3',
+            'TL42018.6.mp3',
+            'TL42096.9.mp3',
+            'TL42147.19.mp3',
+            'TL42147.34.mp3',
+            'TL42147.36.mp3'
+        ];
+
+        let randomSound = sketch.round(sketch.random(0, sounds.length-1));
+        
         sketch.loadImage(this.leafImageURL, img => {
             this.leaf = img;
 
@@ -34,13 +47,31 @@ class Tree {
                     } else {
                         this.maximumAge = objectData.totalpageviews;
                     }
-                    this.ready = true;
+
+                    this._sound = sketch.loadSound(`/resources/audio/${sounds[randomSound]}`, () => {
+                        this._sound.setVolume(this._soundVolume);
+                        this._sound.setLoop(true);
+                        this.setAudio(soundOn);
+
+                        this.ready = true;
+                    });
                 });
+
             });
         });
     }
 
-    createBranch(h, t) {
+    setAudio(bool) {
+        if (bool === true) {
+            this._sound.play();
+            this._sound.setVolume(this._soundVolume, 2.0);
+        } else {
+            this._sound.setVolume(0.0, 2.0)
+            this._sound.pause(2.0);
+        }
+    }
+
+    _createBranch(h, t) {
         // Each branch will be 2/3rds the size of the previous one
         h *= 0.66;  // Height
         t *= 0.66;  // Thickness
@@ -52,7 +83,7 @@ class Tree {
           this._sketch.rotate(this.theta);   // Rotate by theta      
           this._sketch.image(this.branch, 0, 0, t, -h);
           this._sketch.translate(0, -h); // Move to the end of the branch
-          this.createBranch(h, t);       // Ok, now call myself to draw two new branches!!
+          this._createBranch(h, t);       // Ok, now call myself to draw two new branches!!
           this._sketch.pop();     // Whenever we get back here, we "pop" in order to restore the previous matrix state
           
           if (h < (this.size*0.66)*0.66) {
@@ -68,7 +99,7 @@ class Tree {
           this._sketch.rotate(-this.theta/this.lean);
           this._sketch.image(this.branch, 0, 0, t, -h);
           this._sketch.translate(0, -h);
-          this.createBranch(h, t);
+          this._createBranch(h, t);
           this._sketch.pop();      
           
           if (h < (this.size*0.66)*0.66) {
@@ -82,22 +113,27 @@ class Tree {
     }  
 
     update() {
-        this.lifeSpan +=0.5;
-        
-        // This controls the pace of spread
-        this.angleOfMovement = (this._sketch.map(this.lifeSpan,0,this._sketch.windowWidth,400.0,600.0) / this._sketch.windowWidth) * 90.0;
- 
-        if (this.lifeSpan > this.maximumAge) {
-            this.size -=0.85;
-            this.thickness = this.size/10;
-        } else {
-            if (this.size < this.fullSize) {
-                this.size +=0.85;
+        if (this.ready) {
+            this.lifeSpan +=0.5;
+            
+            // This controls the pace of spread
+            this.angleOfMovement = (this._sketch.map(this.lifeSpan,0,this._sketch.windowWidth,400.0,600.0) / this._sketch.windowWidth) * 90.0;
+            
+            if (this.lifeSpan > this.maximumAge) {
+                this.size -=0.85;
                 this.thickness = this.size/10;
+            } else {
+                if (this.size < this.fullSize) {
+                    this.size +=0.85;
+                    this.thickness = this.size/10;
+                }
             }
-        }
+    
+            this._soundVolume = this._sketch.map(this.size, 0, this.fullSize, 0.0, 1.0, true);
+            this._sound.setVolume(this._soundVolume);
 
-        this.isAlive = (this.size > 1);
+            this.isAlive = (this.size > 1);
+        }
     }
 
     render() {
@@ -119,7 +155,7 @@ class Tree {
             // Move to the end of that line
             this._sketch.translate(0,-this.size);
             // Start the recursive branching!
-            this.createBranch(this.size, this.thickness);
+            this._createBranch(this.size, this.thickness);
         }
     }
 
