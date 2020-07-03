@@ -77,7 +77,8 @@ const narrative = {
     messages: {
       CAST: `cast`,
       PLAYAUDIO: `play-audio`,
-      MUTEAUDIO: `mute-audio`
+      MUTEAUDIO: `mute-audio`,
+      CLEAR: `clear`
     },
     commands: {
       board: [
@@ -253,6 +254,23 @@ const narrative = {
                     trigger: {
                         name: 'mute-audio',
                         action: 'mute-audio',
+                        on: 'window',
+                        packet: {}
+                    }
+                    }
+              }
+            },
+            
+            'clear': {
+              targets: {
+                '*': {
+                    name: 'clear the forest',
+                    description: `This world is yours to do as you wish. 
+                    The ground starts to shake. Then, in an instant, the trees vanish.`,
+                    prompt: '',
+                    trigger: {
+                        name: 'clear',
+                        action: 'clear',
                         on: 'window',
                         packet: {}
                     }

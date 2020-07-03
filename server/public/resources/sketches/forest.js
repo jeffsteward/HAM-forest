@@ -16,6 +16,7 @@ const forest = (sketch) => {
         socket.on("cast", sketch.createTree);
         socket.on("play-audio", sketch.playAudio);
         socket.on("mute-audio", sketch.muteAudio);
+        socket.on("clear", sketch.clearForest);
 
         sketch.textSize(20);
 
@@ -71,9 +72,13 @@ const forest = (sketch) => {
         }
     }
 
+    sketch.clearForest = () => {
+        trees.length = 0;
+    }
+
     sketch.keyTyped = () => {
         if (sketch.key === 's') {
-            trees.length = 0;
+            clearForest();
         }
         // prevent any default browser behavior
         return false;
