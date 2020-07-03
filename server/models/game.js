@@ -1,5 +1,6 @@
 const narrative = require('../narrative');
 const loki = require('lokijs')
+const nlp = require('compromise');
 
 let db = new loki('art-forest');
 let games = db.addCollection('games', {indices: 'id'});
@@ -44,7 +45,14 @@ function move(context) {
     game[context.view].history.push(context.command);
     games.update(game);
     
-    let scene = {};
+    let scene = {
+        name: 'error',
+        description: 'I\'m afraid I don\'t understand what you\'re asking me.',
+        prompt: ''
+    };
+
+    let command = nlp(context.command);
+    let verb = command.firstTerms().text();
 
     // check if the command is a general game command
     if (context.command in narrative.commands[context.view]) {
@@ -55,27 +63,34 @@ function move(context) {
         let currentScene = narrative.scenes[context.view][currentSceneName];
 
         // check if the command applies to the scene
-        if (context.command in currentScene.commands) {
-            let action = currentScene.commands[context.command];
+        if (verb in currentScene.commands) {
+            let currentSceneCommand = currentScene.commands[verb];
+            let targets = currentSceneCommand.targets;
+            let matchList = Object.keys(targets);
+            let targetName = '';
 
-            if (action.destination) {
-                scene = narrative.scenes[context.view][action.destination];
-                game[context.view].currentScene = scene.name;
+            if (matchList.toString() === '*') {
+                targetName = matchList.toString();
             } else {
-                scene = action;
-                // do we need to save progress here? 
+                targetName = command.lookup(matchList).text();
+            }
+
+            if (targetName !== "") {
+                let action = targets[targetName];
+
+                if (action.destination) {
+                    scene = narrative.scenes[context.view][action.destination];
+                    game[context.view].currentScene = scene.name;
+                } else {
+                    scene = action;
+                    // do we need to save progress here? 
+                }
             }
 
             // update the game state
             games.update(game);
 
-        }  else {
-            scene = {
-                name: 'error',
-                description: 'I don\'t understand.',
-                prompt: ''
-            };
-        }     
+        }    
     }
 
     return scene;

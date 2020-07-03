@@ -109,138 +109,154 @@ const narrative = {
             There is a small grafting bench here.`,
           prompt: `look at the bench`,
           commands: {
-            'look at the bench': {
-                name: `bench`,    
-                description:
-                  `The bench is worn from centuries of use.
-                  On it is a pile of seed packets and a grafting apparatus.`,
-                prompt:   `look at the packets`,
-                commands: {},        
-                animation: {
-                  name: ``,
-                  startDelay: 0
-                } 
+            'look': {
+              targets: {
+                  'bench': {
+                      name: `bench`,    
+                      description:
+                        `The bench is worn from centuries of use.
+                        On it is a pile of seed packets and a grafting apparatus.`,
+                      prompt:   `look at the packets`,
+                      commands: {},        
+                      animation: {
+                        name: ``,
+                        startDelay: 0
+                      } 
+                  },
+                  'packets': {
+                      name: `packets`,
+                      description:
+                        `You read the names on the packets.
+              
+                        Mixed Seeds
+                        Seeds of Change
+                        Levitory Anticipation
+                        100 Year Egg
+                        Forbidden Broccoli
+                        Small Seeds
+                        USDA All Purpose Seeds
+                        Grow at Your Own Risk`,
+                      prompt: `open mixed seeds`,
+                      commands: {},  
+                      animation: {
+                        name: ``,
+                        startDelay: 0
+                      } 
+                  }
+              } 
             },
 
-            'look at the packets': {
-                name: `packets`,
-                description:
-                  `You read the names on the packets.
-        
-                  Mixed Seeds
-                  Seeds of Change
-                  Levitory Anticipation
-                  100 Year Egg
-                  Forbidden Broccoli
-                  Small Seeds
-                  USDA All Purpose Seeds
-                  Grow at Your Own Risk`,
-                prompt: `open mixed seeds`,
-                commands: {},  
-                animation: {
-                  name: ``,
-                  startDelay: 0
-                } 
-              },
-
-            'open mixed seeds': {
-                name: `wind`,
-                description:
-                  `As you tear open the packet a big gust of wind blows it from your hand.
-                  The seeds scatter across the open field.`,
-                prompt: `open seeds of change`,
-                commands: {}, 
-                animation: {
-                  name: `wind`,
-                  startDelay: 1000
-                } 
-            },
-
-            'open seeds of change': {
-                name: `spill`,
-                description: 
-                  `You pick up another packet and tear it open. This time the seeds spill on to the bench. 
-                  Upon close inspection you notice each one is unique and covered in strange markings.`,
-                prompt: `use grafting apparatus`,
-                commands: {}, 
-                animation: {
-                  name: `spill`,
-                  startDelay: 500
-                } 
-            }, 
-
-            'use grafting apparatus': {
-                name: `apparatus`,
-                description: `You pick up the grafting apparatus and get to work.`,
-                prompt: ``,
-                commands: {}, 
-                animation: {
-                  name: ``,
-                  startDelay: 0
+            'open': {
+              targets: {
+                'mixed seeds': {
+                    name: `wind`,
+                    description:
+                      `As you tear open the packet a big gust of wind blows it from your hand.
+                      The seeds scatter across the open field.`,
+                    prompt: `open seeds of change`,
+                    commands: {}, 
+                    animation: {
+                      name: `wind`,
+                      startDelay: 1000
+                    } 
                 },
-                interactive: {
-                  name: `Apparatus`,
-                  properties: [
-                    `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top`
-                  ]
-                }
-            }, 
-
-            'open grow at your own risk': {
-                name: `apparatus2`,
-                description: `You pick up the grafting apparatus and get to work on grow at your own risk.`,
-                prompt: ``,
-                commands: {}, 
-                animation: {
-                  name: ``,
-                  startDelay: 0
+                'seeds of change': {
+                    name: `spill`,
+                    description: 
+                      `You pick up another packet and tear it open. This time the seeds spill on to the bench. 
+                      Upon close inspection you notice each one is unique and covered in strange markings.`,
+                    prompt: `use grafting apparatus`,
+                    commands: {}, 
+                    animation: {
+                      name: `spill`,
+                      startDelay: 500
+                    } 
+                }, 
+                'grow at your own risk': {
+                    name: `apparatus2`,
+                    description: `You pick up the grafting apparatus and get to work on grow at your own risk.`,
+                    prompt: ``,
+                    commands: {}, 
+                    animation: {
+                      name: ``,
+                      startDelay: 0
+                    },
+                    interactive: {
+                      name: `Apparatus`,
+                      properties: [
+                        `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3889/super-collager/iiif/top`
+                      ]
+                    }
                 },
-                interactive: {
-                  name: `Apparatus`,
-                  properties: [
-                    `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3889/super-collager/iiif/top`
-                  ]
+                'small seeds': {
+                  name: `apparatus3`,
+                  description: `Geez, these really are small. You pick up the grafting apparatus and get to work.`,
+                  prompt: ``,
+                  commands: {}, 
+                  animation: {
+                    name: ``,
+                    startDelay: 0
+                  },
+                  interactive: {
+                    name: `Apparatus`,
+                    properties: [
+                      `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
+                    ]
+                  }
                 }
-            },
-
-            'open small seeds': {
-              name: `apparatus3`,
-              description: `Geez, these really are small. You pick up the grafting apparatus and get to work.`,
-              prompt: ``,
-              commands: {}, 
-              animation: {
-                name: ``,
-                startDelay: 0
-              },
-              interactive: {
-                name: `Apparatus`,
-                properties: [
-                  `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
-                ]
               }
-            },            
+            },
+            
+            'use': {
+              targets: {
+                'grafting apparatus': {
+                    name: `apparatus`,
+                    description: `You pick up the grafting apparatus and get to work.`,
+                    prompt: ``,
+                    commands: {}, 
+                    animation: {
+                      name: ``,
+                      startDelay: 0
+                    },
+                    interactive: {
+                      name: `Apparatus`,
+                      properties: [
+                        `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top`
+                      ]
+                    }
+                }
+              }
+            },          
 
             'listen': {
-              name: 'listen to the forest',
-              description: 'You tilt the side of your head towards the field and let the vibrations tap gently on your eardrum.',
-              prompt: '',
-              trigger: {
-                name: 'play-audio',
-                action: 'play-audio',
-                on: 'window',
-                packet: {}
+              targets: {
+                '*': {
+                    name: 'listen to the forest',
+                    description: 'You tilt the side of your head towards the field and let the vibrations tap gently on your eardrum.',
+                    prompt: '',
+                    trigger: {
+                        name: 'play-audio',
+                        action: 'play-audio',
+                        on: 'window',
+                        packet: {}
+                    }
+                }
               }
             },
             
             'quiet': {
-              name: 'quiet the forest',
-              description: 'You turn away from the field and an eerie silence wraps around you.',
-              prompt: '',
-              trigger: {
-                name: 'mute-audio',
-                action: 'mute-audio',
-                on: 'window',
-                packet: {}
+              targets: {
+                '*': {
+                    name: 'quiet the forest',
+                    description: 'You turn away from the field and an eerie silence wraps around you.',
+                    prompt: '',
+                    trigger: {
+                        name: 'mute-audio',
+                        action: 'mute-audio',
+                        on: 'window',
+                        packet: {}
+                    }
+                    }
               }
             }
           },
