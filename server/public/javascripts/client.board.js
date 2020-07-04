@@ -2,6 +2,7 @@ const GAMEBOARD = 'board';
 let game;
 let animation;
 let animationTimer;
+let triggerTimer;
 let gamewindow;
 let prompt;
 let socket = io();
@@ -96,7 +97,10 @@ function updateBoard() {
         if (trigger.on === GAMEBOARD) {
 
         } else {
-            sendMessage(trigger);
+            triggerTimer = setTimeout(() => {
+                sendMessage(trigger);
+            }, trigger.startDelay);
+
         }
     }
 
