@@ -36,7 +36,15 @@ You pick up the grafting apparatus and get to work.
 //   description: ``,
 //   prompt: ``,
 //   destination: ``,
-//   commands: [],
+//   commands: {
+//      `COMMANDNAME`: {
+//          targets: {
+//            `TARGETNAME`: {
+//
+//            }
+//          }
+//      }
+//   },
 //   animation: {
 //      name: ``,
 //      startDelay: 0
@@ -47,9 +55,10 @@ You pick up the grafting apparatus and get to work.
 //   },
 //   trigger: {
 //      name: ``,
+//      startDelay: 0,
 //      action: ``,
 //      on: '',
-//      packet: '',
+//      packet: {},
 //   }
 // }
 
@@ -67,7 +76,8 @@ const narrative = {
       board: [
         'interactives/apparatus.js',
         'sketches/wind.js',
-        'sketches/spill.js'
+        'sketches/spill.js',
+        'sketches/flash.js'
       ],
       window: [
         'sketches/forest.js',
@@ -78,7 +88,8 @@ const narrative = {
       CAST: `cast`,
       PLAYAUDIO: `play-audio`,
       MUTEAUDIO: `mute-audio`,
-      CLEAR: `clear`
+      CLEAR: `clear`,
+      SHAPSHOT: `snapshot`
     },
     commands: {
       board: [
@@ -237,6 +248,7 @@ const narrative = {
                     prompt: '',
                     trigger: {
                         name: 'play-audio',
+                        startDelay: 0,
                         action: 'play-audio',
                         on: 'window',
                         packet: {}
@@ -253,6 +265,7 @@ const narrative = {
                     prompt: '',
                     trigger: {
                         name: 'mute-audio',
+                        startDelay: 0,
                         action: 'mute-audio',
                         on: 'window',
                         packet: {}
@@ -270,11 +283,33 @@ const narrative = {
                     prompt: '',
                     trigger: {
                         name: 'clear',
+                        startDelay: 0,
                         action: 'clear',
                         on: 'window',
                         packet: {}
                     }
+                }
+              }
+            },
+
+            'photograph': {
+              targets: {
+                '*': {
+                    name: 'photograph the forest',
+                    description: `You raise your hands in front of your face and form your index fingers and thumbs in to the shape to a rectangle. Then you speak the word click.`,
+                    prompt: '',
+                    animation: {
+                      name: `flash`,
+                      startDelay: 750
+                    },
+                    trigger: {
+                        name: 'snapshot',
+                        startDelay: 1000,
+                        action: 'snapshot',
+                        on: 'window',
+                        packet: {}
                     }
+                }
               }
             }
           },

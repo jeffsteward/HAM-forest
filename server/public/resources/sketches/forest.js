@@ -4,6 +4,7 @@ const forest = (sketch) => {
     let soundOn = false;
     let ambientSound;
     let ambientSoundMaxVolume = 0.3;
+    let snapshotFilename = 'forest-snapshot';
     const trees = [];
 
     sketch.preload = () => {
@@ -17,6 +18,7 @@ const forest = (sketch) => {
         socket.on("play-audio", sketch.playAudio);
         socket.on("mute-audio", sketch.muteAudio);
         socket.on("clear", sketch.clearForest);
+        socket.on("snapshot", sketch.saveSnapshot);
 
         sketch.textSize(20);
 
@@ -74,6 +76,10 @@ const forest = (sketch) => {
 
     sketch.clearForest = () => {
         trees.length = 0;
+    }
+
+    sketch.saveSnapshot = () => {
+        sketch.saveCanvas(canvas, snapshotFilename, 'png');
     }
 
     sketch.keyTyped = () => {
