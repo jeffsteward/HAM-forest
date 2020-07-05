@@ -28,6 +28,7 @@ class Apparatus {
         this.buttonNext;
         this.buttonPrevious;
         this.buttonCast;
+        this.loader;
         this.image;
         this.annotationLayer;
         
@@ -69,12 +70,18 @@ class Apparatus {
         toolbar.append(this.buttonPrevious);
         toolbar.append(this.buttonNext);
         toolbar.append(this.buttonCast);
-        
+
         this.image = document.createElement('img');
         this.image.setAttribute('id', `${this.id}_image`);
         this.image.height = this.height;
+        this.image.style.visibility = 'hidden';
+        
+        this.loader = document.createElement('img');
+        this.loader.setAttribute('src', '/resources/images/loader-bar.gif');
+        this.loader.style.position = 'absolute';
 
         this.container.append(toolbar);
+        this.container.append(this.loader);
         this.container.append(this.image);
 
         let dragMove = d3.drag()
@@ -87,6 +94,7 @@ class Apparatus {
         this.annotationLayer = d3.select(this.container)
                                     .append('svg')
                                     .attr('id', `${this.id}_annotationLayer`)
+                                    .style('visibility', 'hidden')
                                     .style('position', 'absolute');
                             
         let annotationGroups = this.annotationLayer.selectAll('g')
@@ -178,12 +186,19 @@ class Apparatus {
     }
 
     _initializeAnnotations() {
+        // turn off the loader animation
+        this.loader.style.visibility = 'hidden';
+
+        // turn on the image
+        this.image.style.visibility = 'visible';
+
         let targetImage = this.image;
         // resize the SVG window to exact dimensions of the underlying image
         this.annotationLayer.attr('width', targetImage.offsetWidth)
                        .attr('height', targetImage.offsetHeight)
                        .style('top', targetImage.offsetTop)
-                       .style('left', targetImage.offsetLeft);
+                       .style('left', targetImage.offsetLeft)
+                       .style('visibility', 'visible');
 
         this._moveAnnotationInbounds(`#${this.annotations[0].id}`);
         this._moveAnnotationInbounds(`#${this.annotations[1].id}`);
