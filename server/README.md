@@ -39,25 +39,28 @@ Each game has two viewers: a game board and a game window.
 
 **Components of the Game Board**  
 
-Board  
---> narrative box  
--------> story text    
--------> command history    
--------> interactives  
---> prompt box  
---> animations  
+Board
+- narrative box  
+    - story text    
+    - command history    
+    - interactives  
+- prompt box  
+- animations  
 
 Narrative box: contains a running history of the game story, commands, and interactions  
 Prompt box: is where the player enters commands in the format of short, imperative statements
+Animations: run behind the narrative box and prompt box
 
 **Components of the Game Window**  
 
 Window  
---> animation/interactive hybrid
+- animation/interactive hybrid
 
 ### Narratives
 
-Narratives are a series of connected scenes. 
+Narratives are a series of connected scenes. Scenes can be guided or self directed.
+
+
 
 
 ### Interactives
@@ -84,9 +87,13 @@ Triggers are a component of a command that alters the behaviour of the board and
 
 ### Sockets
 
-A socket connection is created automtically when the game board client and game window client start up.
+A socket connection is created automtically when the game board client and game window client start up. The `socket` object is global in both contexts. This means it is available to interactives and animations. 
+
+You can send two types of events: `join-game` and `take-action`. All other events will be ignored by the server.
 
 JOIN-GAME
+
+This event is automatically sent from the gamoe board and window at startup. There is no need to use it directly.
 
 ```json 
 let data = {
@@ -98,13 +105,14 @@ socket.emit('join-game', data);
 
 TAKE-ACTION
 
-Socket message data structure for broadcasting actions. Action messages are sent to all sockets in the game except for the sender. The packet structure is dependent on the game and specific action within the game.
+Socket message data structure for broadcasting actions. Action messages are sent to all sockets in the game except for the sender. All messages must include `gameID`, `action`, and `packet`. The structure of `packet` should be whatever data is needed by the receving animation to execute the action. If no data is needed, set packet to {}.
 
-This example is for the `cast` action in the Art Forest game.
+This example is for the `cast` action in the Art Forest game. The key/value pairs in packet is specific to the action in this game.
 
 ```json
+// build the message
 let data = {
-    gameID: 000000,
+    gameID: '3nfy3',
     action: 'cast',
     packet: {
         objectID: this.objectID,
@@ -115,3 +123,17 @@ let data = {
 // send the message
 socket.emit('take-action', data);
 ```
+
+The game server receives this message. It then emits the value of the action key as the event to members of the game.
+
+```
+socket.to(data.gameID).emit(data.action, data.packet);
+```
+
+
+----
+
+## Built With
+
+[p5sj](https://p5js.org): a javascript library for creative coding  
+[compromise](https://github.com/spencermountain/compromise): modest natural language processing  
