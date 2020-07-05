@@ -25,6 +25,7 @@ class Apparatus {
         
         this.parentElement = containerElement;
         this.container;
+        this.toolbar;
         this.buttonNext;
         this.buttonPrevious;
         this.buttonCast;
@@ -40,10 +41,11 @@ class Apparatus {
         this.container = document.createElement('section');
         this.container.style.position = 'relative';
 
-        let toolbar = document.createElement('span');
-        toolbar.style.display = 'flex';
-        toolbar.style.width = '100%';
-        toolbar.style.margin = '5px 0px 5px 0px';
+        this.toolbar = document.createElement('span');
+        this.toolbar.style.display = 'flex';
+        this.toolbar.style.width = '100%';
+        this.toolbar.style.margin = '5px 0px 5px 0px';
+        this.toolbar.style.visibility = 'hidden';
         
         this.buttonNext = document.createElement('button');
         this.buttonNext.innerHTML = '&gt;&gt;&gt;';
@@ -67,9 +69,9 @@ class Apparatus {
         this.buttonCast.style.marginLeft = '10px';
         this.buttonCast.addEventListener('click', this._cast.bind(this));
         
-        toolbar.append(this.buttonPrevious);
-        toolbar.append(this.buttonNext);
-        toolbar.append(this.buttonCast);
+        this.toolbar.append(this.buttonPrevious);
+        this.toolbar.append(this.buttonNext);
+        this.toolbar.append(this.buttonCast);
 
         this.image = document.createElement('img');
         this.image.setAttribute('id', `${this.id}_image`);
@@ -80,8 +82,8 @@ class Apparatus {
         this.loader.setAttribute('src', '/resources/images/loader-bar.gif');
         this.loader.style.position = 'absolute';
 
-        this.container.append(toolbar);
         this.container.append(this.loader);
+        this.container.append(this.toolbar);
         this.container.append(this.image);
 
         let dragMove = d3.drag()
@@ -189,8 +191,9 @@ class Apparatus {
         // turn off the loader animation
         this.loader.style.visibility = 'hidden';
 
-        // turn on the image
+        // turn on the toolbar and image 
         this.image.style.visibility = 'visible';
+        this.toolbar.style.visibility = 'visible';
 
         let targetImage = this.image;
         // resize the SVG window to exact dimensions of the underlying image
