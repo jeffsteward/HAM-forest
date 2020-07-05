@@ -215,6 +215,33 @@ const narrative = {
                       `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
                     ]
                   }
+                },
+                'forbidden broccoli': {
+                  name: `forbidden broccoli`,
+                  description: 
+                    `A cloud of greenish dust emerges from the packet. The broccoli must have gone bad. 
+                    Perhaps a different packet will yield better results.`,
+                  prompt: ``
+                },
+                'levitory anticipation': {
+                  name: `levitory anticipation`,
+                  description: 
+                    `You tip the packet and watch as the seeds hover just above the bench top. Then, motivated by the sheer joy of freedom, the seeds float up and away.`,
+                  prompt: ``
+                },
+                'usda all purpose seeds': {
+                  name: `usda all purpose seeds`,
+                  description: 
+                    `You stare at the packet for a long time. Then decide it's best not to tempt fate.`,
+                    prompt: ``
+                },
+                '100 year egg': {
+                  name: `100 year egg`,
+                  description: 
+                    `This can't be right. You can't grow eggs. Or can you...
+
+                    Before you can decide, a bird swoops down and relieves you of the packet.`,
+                    prompt: ``
                 }
               }
             },
