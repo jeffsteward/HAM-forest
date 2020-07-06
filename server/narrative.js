@@ -32,15 +32,16 @@ You pick up the grafting apparatus and get to work.
 */
 
 // sceneModel = {
-//   name: ``,
-//   description: ``,
+//  sceneName: {
+//   name: `INTERNAL_NAME`,
+//   description: `TEXT_TO_DISPLAY_ON_THE_GAME_BOARD`,
 //   prompt: ``,
-//   destination: ``,
+//   destination: `NAME_OF_SCENE`,
 //   commands: {
 //      `COMMANDNAME`: {
 //          targets: {
 //            `TARGETNAME`: {
-//
+//                [ONE_OR_MORE_SUB_SCENES]
 //            }
 //          }
 //      }
@@ -60,6 +61,7 @@ You pick up the grafting apparatus and get to work.
 //      on: '',
 //      packet: {},
 //   }
+//  }
 // }
 
 // Animations fill the screen
@@ -128,12 +130,7 @@ const narrative = {
                       description:
                         `The bench is worn from centuries of use.
                         On it is a pile of seed packets and a grafting apparatus.`,
-                      prompt:   `look at the packets`,
-                      commands: {},        
-                      animation: {
-                        name: ``,
-                        startDelay: 0
-                      } 
+                      prompt: `look at the packets`
                   },
                   'packets': {
                       name: `packets`,
@@ -148,12 +145,7 @@ const narrative = {
                         Small Seeds
                         USDA All Purpose Seeds
                         Grow at Your Own Risk`,
-                      prompt: `open mixed seeds`,
-                      commands: {},  
-                      animation: {
-                        name: ``,
-                        startDelay: 0
-                      } 
+                      prompt: `open mixed seeds`
                   }
               } 
             },
@@ -166,7 +158,6 @@ const narrative = {
                       `As you tear open the packet a big gust of wind blows it from your hand.
                       The seeds scatter across the open field.`,
                     prompt: `open seeds of change`,
-                    commands: {}, 
                     animation: {
                       name: `wind`,
                       startDelay: 1000
@@ -178,7 +169,6 @@ const narrative = {
                       `You pick up another packet and tear it open. This time the seeds spill on to the bench. 
                       Upon close inspection you notice each one is unique and covered in strange markings.`,
                     prompt: `use grafting apparatus`,
-                    commands: {}, 
                     animation: {
                       name: `spill`,
                       startDelay: 500
@@ -187,12 +177,6 @@ const narrative = {
                 'grow at your own risk': {
                     name: `apparatus2`,
                     description: `You pick up the grafting apparatus and get to work on grow at your own risk.`,
-                    prompt: ``,
-                    commands: {}, 
-                    animation: {
-                      name: ``,
-                      startDelay: 0
-                    },
                     interactive: {
                       name: `Apparatus`,
                       properties: [
@@ -201,14 +185,8 @@ const narrative = {
                     }
                 },
                 'small seeds': {
-                  name: `apparatus3`,
+                  name: `small seeds`,
                   description: `Geez, these really are small. You pick up the grafting apparatus and get to work.`,
-                  prompt: ``,
-                  commands: {}, 
-                  animation: {
-                    name: ``,
-                    startDelay: 0
-                  },
                   interactive: {
                     name: `Apparatus`,
                     properties: [
@@ -221,19 +199,16 @@ const narrative = {
                   description: 
                     `A cloud of greenish dust emerges from the packet. The broccoli must have gone bad. 
                     Perhaps a different packet will yield better results.`,
-                  prompt: ``
                 },
                 'levitory anticipation': {
                   name: `levitory anticipation`,
                   description: 
                     `You tip the packet and watch as the seeds hover just above the bench top. Then, motivated by the sheer joy of freedom, the seeds float up and away.`,
-                  prompt: ``
                 },
                 'usda all purpose seeds': {
                   name: `usda all purpose seeds`,
                   description: 
                     `You stare at the packet for a long time. Then decide it's best not to tempt fate.`,
-                    prompt: ``
                 },
                 '100 year egg': {
                   name: `100 year egg`,
@@ -241,7 +216,6 @@ const narrative = {
                     `This can't be right. You can't grow eggs. Or can you...
 
                     Before you can decide, a bird swoops down and relieves you of the packet.`,
-                    prompt: ``
                 }
               }
             },
