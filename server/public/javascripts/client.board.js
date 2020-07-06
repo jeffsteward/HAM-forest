@@ -4,6 +4,7 @@ let animation;
 let animationTimer;
 let triggerTimer;
 let gamewindow;
+let narrative;
 let prompt;
 let socket = io();
 
@@ -14,6 +15,9 @@ document.addEventListener("DOMContentLoaded", event => {
 
         //join the game room
         socket.emit('join-game', game);
+
+        //initialize the narrative box
+        narrative = document.getElementById('narrative');
 
         //initialize the game window
         gamewindow = document.getElementById('gamewindow');
@@ -68,8 +72,6 @@ function sendCommand(command) {
         // record the action in the narrative box
         let description = document.createElement('p');
         description.innerHTML = `> ${command}`;
-
-        let narrative = document.getElementById('narrative');
         narrative.appendChild(description);
 
         // clear out the prompt box
@@ -107,17 +109,14 @@ function updateBoard() {
         }
     }
 
-    // update the narrative
-    let narrative = document.getElementById('narrative');
-
-    // add the description
+    // add the description to the narrative
     if (game.scene.description) {
         let description = document.createElement('p');
         description.innerText = game.scene.description;
         narrative.appendChild(description);
     }
 
-    // add the interactive
+    // add the interactive to the narrative
     if (game.scene.interactive) {
         let interactiveContainer = document.createElement('p');
         let properties;
@@ -132,6 +131,7 @@ function updateBoard() {
         narrative.appendChild(interactiveContainer);
     }
     
+    // scroll to the bottom of the narrative window so all new content is in view
     narrative.scrollTop = narrative.scrollHeight;
 
     // update the prompt
