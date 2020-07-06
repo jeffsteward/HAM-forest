@@ -72,7 +72,10 @@ function sendCommand(command) {
         let narrative = document.getElementById('narrative');
         narrative.appendChild(description);
 
-        // take the action
+        // clear out the prompt box
+        prompt.value = '';
+
+        // send the action on to the game MCP
         takeAction(command).then(result => {
             game.scene = result;
             updateBoard();
@@ -132,8 +135,11 @@ function updateBoard() {
     narrative.scrollTop = narrative.scrollHeight;
 
     // update the prompt
-    prompt.value = game.scene.prompt;
-    prompt.readOnly = (game.scene.prompt !== '');
+    prompt.readOnly = false;
+    if (game.scene.prompt) {
+        prompt.value = game.scene.prompt;
+        prompt.readOnly = true;
+    }
     prompt.focus();
 
     // update the animation
