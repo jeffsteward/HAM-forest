@@ -48,7 +48,7 @@ Board
 - animations  
 
 Narrative box: contains a running history of the game story, commands, and interactions  
-Prompt box: is where the player enters commands in the format of short, imperative statements
+Prompt box: is where the player enters commands in the format of short, imperative statements  
 Animations: run behind the narrative box and prompt box
 
 **Components of the Game Window**  
@@ -58,9 +58,17 @@ Window
 
 ### Narratives
 
-Narratives are a series of connected scenes. Scenes can be guided or self directed.
+Narratives are a series of connected scenes. Scenes can be guided or self directed. Scenes may include one or more of these fields.
 
-
+| Key | Value | 
+| --- | ----- |
+| name | an internal identifier |
+| description | the text to display on the game board |
+| prompt | the text to display in the prompt box; any text will force the prompt to be readonly; make sure the text is a valid game commnd; supply prompts when you want to guide players through a scene |
+| commands | actions the player can take on items (targets) in a scene |
+| trigger | |
+| animation | |
+| interactive | |
 
 
 ### Interactives
@@ -79,7 +87,7 @@ class ExampleInteractive {
 
 ### Animations
 
-Animations are p5 sketches that run in [instance mode](https://github.com/processing/p5.js/wiki/Global-and-instance-mode).
+Animations are p5 sketches that run in [instance mode](https://github.com/processing/p5.js/wiki/Global-and-instance-mode). When referencing animations in a scene, the name must match one of the object variables in the resources/sketches folder.
 
 ### Triggers
 
