@@ -3,6 +3,7 @@ let game;
 let animation;
 let animationTimer;
 let triggerTimer;
+let gameboard;
 let gamewindow;
 let narrative;
 let prompt;
@@ -15,6 +16,9 @@ document.addEventListener("DOMContentLoaded", event => {
 
         //join the game room
         socket.emit('join-game', game);
+
+        //initialize the game board
+        gameboard = document.getElementById('gameboard');
 
         //initialize the narrative box
         narrative = document.getElementById('narrative');
@@ -100,7 +104,14 @@ function updateBoard() {
     if (game.scene.trigger) {
         let trigger = game.scene.trigger;
         if (trigger.on === GAMEBOARD) {
-
+            if (trigger.action === 'fade-out-and-in') {
+                setTimeout(() => {
+                    gameboard.setAttribute('style', 'animation: fade-out-in 15s ease 1 forwards');
+                    gameboard.addEventListener('animationend', (e) => {
+                        gameboard.removeAttribute('style');
+                    })
+                }, trigger.startDelay);
+            }
         } else {
             triggerTimer = setTimeout(() => {
                 sendMessage(trigger);

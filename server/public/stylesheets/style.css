@@ -105,3 +105,20 @@ button {
   overflow:hidden;
   border:0px;
 }
+
+@keyframes fade-out {
+  0% {opacity: 1.0;}
+  100% {opacity: 0.0;}
+}
+
+@keyframes fade-in {
+  0% {opacity: 0.0;}
+  100% {opacity: 1.0;}
+}
+
+@keyframes fade-out-in {
+  0% {opacity: 1.0;}
+  20% {opacity: 0.0;}
+  80% {opacity: 0.0;}
+  100% {opacity: 1.0;}
+}

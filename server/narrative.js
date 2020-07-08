@@ -146,6 +146,17 @@ const narrative = {
                         USDA All Purpose Seeds
                         Grow at Your Own Risk`,
                       prompt: `open mixed seeds`
+                  },
+                  'forest': {
+                    name: 'forest',
+                    description: `Isn't it beautiful?`,
+                    trigger: {
+                      name: 'fade-out-and-in',
+                      startDelay: 2000,
+                      action: 'fade-out-and-in',
+                      on: 'board',
+                      packet: {}
+                    }
                   }
               } 
             },
