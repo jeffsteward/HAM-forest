@@ -72,7 +72,28 @@ const narrative = {
       title: 'Art Forest',
       version: '1.0.7',
       description: `An adventure in growth projections and patience`,
-      credits: ``
+      credits: 
+        `Game design and programming by Jeff Steward
+        
+        Sound and music by Hayley Murks-Abdikadirova
+        
+        Art images courtesy of <a href="https://www.harvardartmuseums.org" target="_blank">Harvard Art Museums</a>`,
+      help: 
+        `You are playing a "game" that is a mix of classic <a href="https://en.wikipedia.org/wiki/Interactive_fiction" target="_blank">text adventure</a>, <a href="https://en.wikipedia.org/wiki/Adventure_game#Point-and-click_adventure_games" target="_blank">point-and-click adventure</a>, and <a href="https://en.wikipedia.org/wiki/Adventure_game#Walking_simulators" target="_blank">walking simulator</a>. This game is deliberately slow.
+      
+        Most of the interaction is carried out by entering commands in the prompt box. The prompt box is the > and blinking cursor near the bottom of the scene. If you got this far you figured out you could at least type help in to the box. 
+      
+        Some commands trigger interactive graphics to appear in the game board. At those momemts, grab your mouse and click around. You never know what might happen.
+
+        Occassionaly animations will play as a result of a command. Enjoy! There's nothing for you to do except take them in while they play out. Hopefully they make your time here a bit more enjoyable.
+
+        Most commands take the form VERB NOUN (i.e. ACTION TARGET). For example, 'look at the bench'. Or, 'listen at the forest'. Here are some verbs you might consider expermienting with:
+
+        open
+        look
+        listen
+        quiet
+        photograph` 
     },
     resources: {
       board: [
@@ -95,9 +116,8 @@ const narrative = {
     },
     commands: {
       board: [
-        'instructions',
-        'credits',
-        'hint', 
+        'help',
+        'credits'
       ],
       window: [
         'status'
@@ -308,7 +328,7 @@ const narrative = {
               targets: {
                 '*': {
                     name: 'photograph the forest',
-                    description: `You raise your hands in front of your face and form your index fingers and thumbs in to the shape to a rectangle. Then you speak the word click.`,
+                    description: `You create a rectangular frame with your index fingers and thumbs. Raise it to your eyes. Then you speak the word click. (And whisper to yourself, I am Cam Jansen).`,
                     prompt: '',
                     animation: {
                       name: `flash`,
@@ -325,26 +345,6 @@ const narrative = {
               }
             }
           },
-          animation: {
-            name: ``,
-            startDelay: 0
-          } 
-        },
-        instructions: {
-          name: `instructions`,
-          description: ``,
-          prompt: ``,
-          destination: ``,
-          animation: {
-            name: ``,
-            startDelay: 0
-          } 
-        },
-        credits: {
-          name: `credits`,
-          description: ``,
-          prompt: ``,
-          destination: ``,
           animation: {
             name: ``,
             startDelay: 0
