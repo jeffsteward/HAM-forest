@@ -77,7 +77,9 @@ const narrative = {
         
         Sound and music by Hayley Murks-Abdikadirova
         
-        Art images courtesy of <a href="https://www.harvardartmuseums.org" target="_blank">Harvard Art Museums</a>`,
+        Art images courtesy of <a href="https://www.harvardartmuseums.org" target="_blank">Harvard Art Museums</a>
+        
+        Art Forest is a work in progress. It started in May 2019 and continues to grow.`,
       help: 
         `You are playing a "game" that is a mix of classic <a href="https://en.wikipedia.org/wiki/Interactive_fiction" target="_blank">text adventure</a>, <a href="https://en.wikipedia.org/wiki/Adventure_game#Point-and-click_adventure_games" target="_blank">point-and-click adventure</a>, and <a href="https://en.wikipedia.org/wiki/Adventure_game#Walking_simulators" target="_blank">walking simulator</a>. This game is deliberately slow.
       
