@@ -123,7 +123,7 @@ function updateBoard() {
     // add the description to the narrative
     if (game.scene.description) {
         let description = document.createElement('p');
-        description.innerText = game.scene.description;
+        description.innerHTML = game.scene.description;
         narrative.appendChild(description);
     }
 
