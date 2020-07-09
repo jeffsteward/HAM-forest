@@ -47,16 +47,16 @@ function move(context) {
     
     let scene = {
         name: 'error',
-        description: 'I\'m afraid I don\'t understand what you\'re asking me.',
-        prompt: ''
+        description: 'I\'m afraid I don\'t understand what you\'re asking me.'
     };
 
     let command = nlp(context.command);
     let verb = command.firstTerms().text();
 
     // check if the command is a general game command
-    if (context.command in narrative.commands[context.view]) {
-        
+    if (narrative.commands[context.view].includes(context.command )) {
+        scene.description = narrative.info[context.command];
+
     } else {
         // load current scene info
         let currentSceneName = game[context.view].currentScene;
