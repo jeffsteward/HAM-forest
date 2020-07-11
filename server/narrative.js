@@ -102,7 +102,8 @@ const narrative = {
         'interactives/apparatus.js',
         'sketches/wind.js',
         'sketches/spill.js',
-        'sketches/flash.js'
+        'sketches/flash.js',
+        'sketches/levitation.js',
       ],
       window: [
         'sketches/forest.js',
@@ -237,6 +238,10 @@ const narrative = {
                   name: `levitory anticipation`,
                   description: 
                     `You tip the packet and watch as the seeds hover just above the bench top. Then, motivated by the sheer joy of freedom, the seeds float up and away.`,
+                  animation: {
+                    name: `levitation`,
+                    startDelay: 500
+                  } 
                 },
                 'usda all purpose seeds': {
                   name: `usda all purpose seeds`,
