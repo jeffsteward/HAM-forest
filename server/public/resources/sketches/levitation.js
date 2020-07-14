@@ -36,13 +36,13 @@ const levitation = (sketch) => {
         sketch.clear();
 
         seeds.forEach(seed => {
-            seed.lifeSpan -= 2;
             
             if (sketch.frameCount < 20) {
                 seed.position.add(p5.Vector.div(seed.velocity, 10));                
             } else if (sketch.frameCount > 30 && sketch.frameCount < 75) {
                 seed.position.add(p5.Vector.random2D());
             } else {
+                seed.lifeSpan -= 2;
                 seed.position.add(seed.velocity);
                 seed.color.setAlpha(seed.lifeSpan);
             }
