@@ -1,18 +1,19 @@
 const narrative = require('../narrative');
 const loki = require('lokijs')
 const nlp = require('compromise');
+const slugify = require('slugify')
 
-let db = new loki('art-forest');
+let db = new loki(slugify(narrative.info.title, {lower: true}));
 let games = db.addCollection('games', {indices: 'id'});
 
-const model = {
+const modelGame = {
     id: '',
     board: {
-        currentScene: 'intro',
+        currentScene: narrative.info.startScene,
         history: []
     },
     window: {
-        currentScene: 'intro',
+        currentScene: narrative.info.startScene,
         history: []
     }
 };
@@ -22,12 +23,12 @@ const modelScene = {
 };
 
 function create(view) {
-    let game = Object.assign({}, model);
+    let game = Object.assign({}, modelGame);
 
     if (view === 'board') {
         game.id = (Math.floor(new Date() / 1000)).toString(36);
-        game.board.currentScene = 'intro';
-        game.window.currentScene = 'intro'; 
+        game.board.currentScene = narrative.info.startScene;
+        game.window.currentScene = narrative.info.startScene; 
         games.insert(game);
     }
 
@@ -95,7 +96,6 @@ function move(context) {
 
             // update the game state
             games.update(game);
-
         }  
     }
 

@@ -96,7 +96,8 @@ const narrative = {
         listen
         quiet
         photograph`,
-      error: `I'm afraid I don't understand what you're asking me.` 
+      error: `I'm afraid I don't understand what you're asking me.`,
+      startScene: `intro`
     },
     resources: {
       board: [
