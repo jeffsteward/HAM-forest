@@ -1,11 +1,14 @@
-// Each game must have an intro scene
+// Each game must have at least one scene
 
 const narrative = {
     info: {
-      title: 'Art Forest',
-      version: '1.0.7',
-      description: `An adventure in growth projections and patience`,
-      credits: ``
+      title: 'Game Title',
+      version: '1.0.0',
+      description: `Brief game description to be displayed at the start of the game`,
+      credits: `List who made it here`,
+      help: `Instructions on how to play`,
+      error: `Standard error message for bad commands`,
+      startScene: `intro`
     },
     resources: {
       board: [
@@ -52,8 +55,23 @@ const narrative = {
             There is a small grafting bench here.`,
           prompt: `look at the bench`,
           commands: {
-            'look at the bench': {
-              destination: `bench`,
+            'look': {
+              targets: {
+                'bench': {
+                  name: `bench`,    
+                  description:
+                    `The bench is worn from centuries of use.
+                    On it is a pile of seed packets and a grafting apparatus.`,
+                  prompt: `look at the packets`
+                },
+              }
+            },
+            'go': {
+              targets: {
+                'east': {
+                  destination: `next-scene`,
+                }
+              } 
             }
           },
           animation: {
