@@ -17,6 +17,10 @@ const model = {
     }
 };
 
+const modelScene = {
+    description: ''
+};
+
 function create(view) {
     let game = Object.assign({}, model);
 
@@ -46,11 +50,12 @@ function move(context) {
     games.update(game);
 
     // start building the scene
-    // assume the command is invalid until proven otherwise
-    let scene = {
-        description: narrative.info.error
-    };
+    let scene = Object.assign({}, modelScene);
 
+    // set the default description to the game error message
+    scene.description = narrative.info.error;
+
+    // parse the command; look for the VERB 
     let command = nlp(context.command);
     let verb = command.firstTerms().text();
 
@@ -91,7 +96,7 @@ function move(context) {
             // update the game state
             games.update(game);
 
-        }    
+        }  
     }
 
     return scene;
