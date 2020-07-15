@@ -44,10 +44,11 @@ function move(context) {
     // add the command to the running game history 
     game[context.view].history.push(context.command);
     games.update(game);
-    
+
+    // start building the scene
+    // assume the command is invalid until proven otherwise
     let scene = {
-        name: 'error',
-        description: 'I\'m afraid I don\'t understand what you\'re asking me.'
+        description: narrative.info.error
     };
 
     let command = nlp(context.command);

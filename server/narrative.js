@@ -95,7 +95,8 @@ const narrative = {
         look
         listen
         quiet
-        photograph` 
+        photograph`,
+      error: `I'm afraid I don't understand what you're asking me.` 
     },
     resources: {
       board: [
