@@ -1,7 +1,8 @@
-const narrative = require('../narrative');
+const narrative = require('../public/resources/narrative');
 const loki = require('lokijs')
 const nlp = require('compromise');
-const slugify = require('slugify')
+const slugify = require('slugify');
+const { get } = require('request');
 
 let db = new loki(slugify(narrative.info.title, {lower: true}));
 let games = db.addCollection('games', {indices: 'id'});
@@ -21,6 +22,14 @@ const modelGame = {
 const modelScene = {
     description: ''
 };
+
+function getInfo() {
+    return narrative.info;
+}
+
+function getResources() {
+    return narrative.resources;
+}
 
 function create(view) {
     let game = Object.assign({}, modelGame);
@@ -103,6 +112,8 @@ function move(context) {
 }
 
 module.exports = {
+    getInfo: getInfo,
+    getResources: getResources,
     create: create,
     findById: findById,
     move: move
