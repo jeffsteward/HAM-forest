@@ -1,4 +1,3 @@
-const GAMEBOARD = 'board';
 let game;
 let animation;
 let animationTimer;
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", event => {
         game = result;
 
         //join the game room
-        socket.emit('join-game', game);
+        socket.emit(MessageEvents.JOIN_GAME, game);
 
         //initialize the game board
         gameboard = document.getElementById('gameboard');
@@ -46,7 +45,7 @@ document.addEventListener("DOMContentLoaded", event => {
 });
 
 async function startGame() {
-    const response = await fetch(`/game/start/${GAMEBOARD}`, {method: 'POST'});
+    const response = await fetch(`/game/start/${GameViews.BOARD}`, {method: 'POST'});
     const start = await response.json();
 
     return start;
@@ -58,7 +57,7 @@ async function takeAction(command) {
         command: `${command}`
     };
 
-    const response = await fetch(`/game/${game.gameID}/${GAMEBOARD}/commands`, 
+    const response = await fetch(`/game/${game.gameID}/${GameViews.BOARD}/commands`, 
         {
             method: 'POST', 
             headers: {
@@ -96,15 +95,15 @@ function sendMessage(message) {
         packet: message.packet
     };
     
-    socket.emit('take-action', data);
+    socket.emit(MessageEvents.TAKE_ACTION, data);
 }
 
 function updateBoard() {
     // trigger actions
     if (game.scene.trigger) {
         let trigger = game.scene.trigger;
-        if (trigger.on === GAMEBOARD) {
-            if (trigger.action === 'fade-out-and-in') {
+        if (trigger.on === GameViews.BOARD) {
+            if (trigger.action === TriggerTypes.FADE_OUT_AND_IN) {
                 setTimeout(() => {
                     gameboard.setAttribute('style', 'animation: fade-out-in 15s ease 1 forwards');
                     gameboard.addEventListener('animationend', (e) => {

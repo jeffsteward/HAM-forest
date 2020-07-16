@@ -1,4 +1,3 @@
-const GAMEWINDOW = 'window';
 let game = {};
 let animation;
 let socket = io();
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", event => {
         //join the game room
         game.gameID = window.location.hash.replace("#","");
         if (game.gameID) {
-            socket.emit("join-game", {gameID: game.gameID});
+            socket.emit(MessageEvents.JOIN_GAME, {gameID: game.gameID});
         }
 
         updateWindow();
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", event => {
 });
 
 async function startGame() {
-    const response = await fetch(`/game/start/${GAMEWINDOW}`, {method: 'POST'});
+    const response = await fetch(`/game/start/${GameViews.WINDOW}`, {method: 'POST'});
     const start = await response.json();
 
     return start;
