@@ -1,0 +1,16 @@
+<script>
+    {{#if animation}}
+        new p5({{animation}});
+    {{/if}}
+
+    {{#if interactive}}
+        let interactiveContainer = document.createElement('p');
+        let properties = '{{properties}}';
+
+        // create an instance of the interactive
+        let interactiveFactory = new Function('i', 'p', `return new {{interactive}}(i, p)`);
+        interactiveFactory(interactiveContainer, properties);
+
+        document.body.appendChild(interactiveContainer);
+    {{/if}}
+</script>
