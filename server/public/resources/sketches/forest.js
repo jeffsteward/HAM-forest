@@ -3,7 +3,7 @@ const forest = (sketch) => {
     let canvas;
     let soundOn = false;
     let ambientSound;
-    let ambientSoundMaxVolume = 0.3;
+    let ambientSoundMaxVolume = 0.05;
     let snapshotFilename = 'forest-snapshot';
     const trees = [];
 
@@ -41,6 +41,11 @@ const forest = (sketch) => {
     }
 
     sketch.drawTree = (data) => {
+        for (let tree of trees) {
+            if (tree.isAlive) {
+                tree.setAudioLevel(0.02);
+            }
+        }
         trees.push(new Tree(sketch, sketch.random(0,sketch.windowWidth), sketch.windowHeight, sketch.random(100, sketch.windowHeight/2.10), soundOn, data));
     }
 

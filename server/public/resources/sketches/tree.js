@@ -19,6 +19,7 @@ class Tree {
         this.isAlive = false;
         this._sound;
         this._soundVolume = 0.0;
+        this._soundLevel = 1.0;
 
         let sounds = {
             20477: 'TL41799.7.mp3',
@@ -71,11 +72,15 @@ class Tree {
     setAudio(bool) {
         if (bool === true) {
             this._sound.play();
-            this._sound.setVolume(this._soundVolume, 2.0);
+            this._sound.setVolume(this._soundVolume * this._soundLevel, 2.0);
         } else {
             this._sound.setVolume(0.0, 2.0)
             this._sound.pause(2.0);
         }
+    }
+
+    setAudioLevel(level) {
+        this._soundLevel = level;
     }
 
     _createBranch(h, t) {
@@ -137,7 +142,7 @@ class Tree {
             }
     
             this._soundVolume = this._sketch.map(this.size, 0, this.fullSize, 0.0, 1.0, true);
-            this._sound.setVolume(this._soundVolume);
+            this._sound.setVolume(this._soundVolume * this._soundLevel);
 
             this.isAlive = (this.size > 1);
         }
