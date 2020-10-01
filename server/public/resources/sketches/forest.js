@@ -75,6 +75,7 @@ const forest = (sketch) => {
     }
 
     sketch.clearForest = () => {
+        sketch.muteAudio();
         trees.length = 0;
     }
 

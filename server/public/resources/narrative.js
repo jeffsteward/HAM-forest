@@ -161,7 +161,8 @@ const narrative = {
                       name: `packets`,
                       description:
                         `You read the names on the packets.
-              
+                        
+                        Fuji Foliage
                         Mixed Seeds
                         Seeds of Change
                         Levitory Anticipation
@@ -170,7 +171,7 @@ const narrative = {
                         Small Seeds
                         USDA All Purpose Seeds
                         Grow at Your Own Risk`,
-                      prompt: `open mixed seeds`
+                      prompt: `open fuji foliage`
                   },
                   'forest': {
                     name: 'forest',
@@ -193,7 +194,7 @@ const narrative = {
                     description:
                       `As you tear open the packet a big gust of wind blows it from your hand.
                       The seeds scatter across the open field.`,
-                    prompt: `open seeds of change`,
+                    prompt: ``,
                     animation: {
                       name: `wind`,
                       startDelay: 1000
@@ -204,12 +205,22 @@ const narrative = {
                     description: 
                       `You pick up another packet and tear it open. This time the seeds spill on to the bench. 
                       Upon close inspection you notice each one is unique and covered in strange markings.`,
-                    prompt: `use grafting apparatus`,
+                    prompt: ``,
                     animation: {
                       name: `spill`,
                       startDelay: 500
                     } 
                 }, 
+                'fuji foliage': {
+                    name: `fuji foliage`,
+                    description: `You pick up the grafting apparatus and get to work on fuji foliage.`,
+                    interactive: {
+                      name: `Apparatus`,
+                      properties: [
+                        `https://www.harvardartmuseums.org/profile/hayley_murks@harvard.edu/mycollections/5196/fuji-foliage/iiif/top`
+                      ]
+                    }
+                },
                 'grow at your own risk': {
                     name: `apparatus2`,
                     description: `You pick up the grafting apparatus and get to work on grow at your own risk.`,

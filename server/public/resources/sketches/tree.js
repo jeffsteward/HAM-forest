@@ -20,14 +20,14 @@ class Tree {
         this._sound;
         this._soundVolume = 0.0;
 
-        let sounds = [
-            'TL41799.7.mp3',
-            'TL42018.6.mp3',
-            'TL42096.9.mp3',
-            'TL42147.19.mp3',
-            'TL42147.34.mp3',
-            'TL42147.36.mp3'
-        ];
+        let sounds = {
+            20477: 'TL41799.7.mp3',
+            340565: 'TL42018.6.mp3',
+            340471: 'TL42096.9.mp3',
+            351381: 'TL42147.19.mp3',
+            340480: 'TL42147.34.mp3',
+            340359: 'TL42147.36.mp3', 
+        };
 
         let randomSound = sketch.round(sketch.random(0, sounds.length-1));
         
@@ -48,7 +48,14 @@ class Tree {
                         this.maximumAge = objectData.totalpageviews;
                     }
 
-                    this._sound = sketch.loadSound(`/resources/audio/${sounds[randomSound]}`, () => {
+                    let soundFileName = sounds[data.objectID];
+                    if (typeof soundFileName === 'undefined') {
+                        let soundKeys = Object.keys(sounds);
+                        let randomKey = soundKeys[sketch.round(sketch.random(0, soundKeys.length-1))];
+                        soundFileName = sounds[randomKey];
+                    }
+
+                    this._sound = sketch.loadSound(`/resources/audio/${soundFileName}`, () => {
                         this._sound.setVolume(this._soundVolume);
                         this._sound.setLoop(true);
                         this.setAudio(soundOn);
