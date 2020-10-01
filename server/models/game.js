@@ -16,7 +16,8 @@ const modelGame = {
     window: {
         currentScene: narrative.info.startScene,
         history: []
-    }
+    },
+    inventory: []
 };
 
 const modelScene = {
