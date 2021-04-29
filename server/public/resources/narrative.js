@@ -217,7 +217,7 @@ const narrative = {
                     interactive: {
                       name: `Apparatus`,
                       properties: [
-                        `https://www.harvardartmuseums.org/profile/hayley_murks@harvard.edu/mycollections/5196/fuji-foliage/iiif/top`
+                        `https://harvardartmuseums.org/profile/hayley_murks@harvard.edu/mycollections/5196/fuji-foliage/iiif/top`
                       ]
                     }
                 },
@@ -227,7 +227,7 @@ const narrative = {
                     interactive: {
                       name: `Apparatus`,
                       properties: [
-                        `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3889/super-collager/iiif/top`
+                        `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3889/super-collager/iiif/top`
                       ]
                     }
                 },
@@ -237,7 +237,7 @@ const narrative = {
                   interactive: {
                     name: `Apparatus`,
                     properties: [
-                      `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
+                      `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
                     ]
                   }
                 },
@@ -285,7 +285,7 @@ const narrative = {
                     interactive: {
                       name: `Apparatus`,
                       properties: [
-                        `https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top`
+                        `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top`
                       ]
                     }
                 }
