@@ -71,6 +71,7 @@ const narrative = {
     info: {
       title: 'Art Forest',
       version: '1.0.7',
+      language: 'en',
       description: `An adventure in growth projections and patience`,
       credits: 
         `Game design and programming by Jeff Steward
