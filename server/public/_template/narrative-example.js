@@ -4,6 +4,7 @@ const narrative = {
     info: {
       title: 'Game Title',
       version: '1.0.0',
+      language: 'en',
       description: `Brief game description to be displayed at the start of the game`,
       credits: `List who made it here`,
       help: `Instructions on how to play`,
