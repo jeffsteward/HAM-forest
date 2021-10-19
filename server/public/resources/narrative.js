@@ -266,7 +266,7 @@ const narrative = {
                   interactive: {
                     name: `Apparatus`,
                     properties: [
-                      `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
+                      `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3818/art-forest/iiif/top`
                     ]
                   }
                 },
