@@ -141,14 +141,52 @@ const narrative = {
         }
       },
       board: {
+        house: {
+          name: `house`,
+          description: 
+            `East of Field
+            You are at the white house. There is a message scrawled across the boarded door.`,
+          commands: {
+            'go': {
+              targets: {
+                'west': {
+                  destination: 'intro'
+                },
+                'east': {
+                  description: 'The house stands in your way. It is totally boarded up and seems pretty determined to keep you out.'
+                }
+              }
+            },
+            'look': {
+              targets: {
+                'message': {
+                  description: 
+                    `The message was hastily written and a bit faded. It must have been written ages ago. It states:
+
+                    The forest has been acting odd lately. 
+                    Gone to see how it's feeling. 
+                    ✨🍄🌳🌲✨
+                    Be back someday.`
+                }
+              }
+            }
+          }
+        },
         intro: {
           name: `intro`,
           description: 
             `West of House
-            You are standing in an open field west of a white house, with a boarded front door.
+            You are standing in an open field west of a white house, with a boarded front door. 
             There is a small grafting bench here.`,
-          prompt: `look at the bench`,
+          prompt: ``,
           commands: {
+            'go': {
+              targets: {
+                'east': {
+                  destination: 'house'
+                }
+              }
+            }, 
             'look': {
               targets: {
                   'bench': {
@@ -156,7 +194,7 @@ const narrative = {
                       description:
                         `The bench is worn from centuries of use.
                         On it is a pile of seed packets and a grafting apparatus.`,
-                      prompt: `look at the packets`
+                      prompt: ``
                   },
                   'packets': {
                       name: `packets`,
@@ -169,9 +207,10 @@ const narrative = {
                         100 Year Egg
                         Forbidden Broccoli
                         Small Seeds
+                        States of Play
                         USDA All Purpose Seeds
                         Grow at Your Own Risk`,
-                      prompt: `open mixed seeds`
+                      prompt: ``
                   },
                   'forest': {
                     name: 'forest',
@@ -194,7 +233,7 @@ const narrative = {
                     description:
                       `As you tear open the packet a big gust of wind blows it from your hand.
                       The seeds scatter across the open field.`,
-                    prompt: `open seeds of change`,
+                    prompt: ``,
                     animation: {
                       name: `wind`,
                       startDelay: 1000
@@ -205,7 +244,7 @@ const narrative = {
                     description: 
                       `You pick up another packet and tear it open. This time the seeds spill on to the bench. 
                       Upon close inspection you notice each one is unique and covered in strange markings.`,
-                    prompt: `use grafting apparatus`,
+                    prompt: ``,
                     animation: {
                       name: `spill`,
                       startDelay: 500
@@ -228,6 +267,16 @@ const narrative = {
                     name: `Apparatus`,
                     properties: [
                       `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
+                    ]
+                  }
+                },
+                'states of play': {
+                  name: `states of play`,
+                  description: `You tear open the packet. Somewhere in the distance you hear a voice call out, "Let the games begin!!!" You pick up the grafting apparatus and get to work.`,
+                  interactive: {
+                    name: `Apparatus`,
+                    properties: [
+                      `/resources/collections/sop.json`
                     ]
                   }
                 },

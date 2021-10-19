@@ -1,0 +1,116 @@
+{
+    "@context": "http://iiif.io/api/presentation/2/context.json",
+    "@id": "https://iiif.harvardartmuseums.org/manifests/object/343026",
+    "@type": "sc:Manifest",
+    "attribution": "Harvard Art Museums",
+    "description": "",
+    "label": "Woman's Head against the Shore",
+    "logo": {
+        "@id": "https://ids.lib.harvard.edu/ids/iiif/437958013/full/!800,800/0/default.jpg",
+        "service": {
+            "@context": "http://iiif.io/api/image/2/context.json",
+            "@id": "https://ids.lib.harvard.edu/ids/iiif/437958013",
+            "profile": "http://iiif.io/api/image/2/level2.json"
+        }
+    },
+    "metadata": [
+        {
+            "label": "Date",
+            "value": "1899"
+        },
+        {
+            "label": "Classification",
+            "value": "Prints"
+        },
+        {
+            "label": "Credit Line",
+            "value": "Harvard Art Museums/Fogg Museum, Gift of Lynn G. Straus in memory of Philip A. Straus"
+        },
+        {
+            "label": "Object Number",
+            "value": "2012.261"
+        },
+        {
+            "label": "People",
+            "value": [
+                "Artist: Edvard Munch, Norwegian, 1863 - 1944"
+            ]
+        },
+        {
+            "label": "Medium",
+            "value": "Woodcut printed in turquoise-green and pale and dark orange ink on off-white wove paper"
+        },
+        {
+            "label": "Technique",
+            "value": "Woodcut"
+        },
+        {
+            "label": "Dimensions",
+            "value": "image: 46 x 41 cm (18 1/8 x 16 1/8 in.)\r\nsheet: 60.2 x 48.2 cm (23 11/16 x 19 in.)"
+        },
+        {
+            "label": "Provenance",
+            "value": "SPB NY. Philip and Lynn Straus (1972-2012); Lynn Straus, gift; to the Harvard Art Museums, 2012."
+        },
+        {
+            "label": "Copyright",
+            "value": "© The Munch Museum / The Munch-Ellingsen Group / Artists Rights Society (ARS), New York"
+        }
+    ],
+    "rendering": {
+        "@id": "https://www.harvardartmuseums.org/collections/object/343026",
+        "format": "text/html",
+        "label": "Full record view"
+    },
+    "sequences": [
+        {
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/343026/sequence/normal",
+            "@type": "sc:Sequence",
+            "canvases": [
+                {
+                    "@id": "https://iiif.harvardartmuseums.org/manifests/object/343026/canvas/canvas-47173419",
+                    "@type": "sc:Canvas",
+                    "height": 1024,
+                    "images": [
+                        {
+                            "@id": "https://iiif.harvardartmuseums.org/manifests/object/343026/annotation/anno-47173419",
+                            "@type": "oa:Annotation",
+                            "motivation": "sc:painting",
+                            "on": "https://iiif.harvardartmuseums.org/manifests/object/343026/canvas/canvas-47173419",
+                            "resource": {
+                                "@id": "https://ids.lib.harvard.edu/ids/iiif/47173419/full/full/0/default.jpg",
+                                "@type": "dctypes:Image",
+                                "format": "image/jpeg",
+                                "height": 1024,
+                                "service": {
+                                    "@context": "http://iiif.io/api/image/2/context.json",
+                                    "@id": "https://ids.lib.harvard.edu/ids/iiif/47173419",
+                                    "profile": "http://iiif.io/api/image/2/level2.json"
+                                },
+                                "width": 808
+                            }
+                        }
+                    ],
+                    "label": "1",
+                    "otherContent": [
+                        {
+                            "@id": "https://iiif.harvardartmuseums.org/manifests/object/343026/list/47173419",
+                            "@type": "sc:AnnotationList"
+                        }
+                    ],
+                    "width": 808
+                }
+            ],
+            "viewingHint": "individuals"
+        }
+    ],
+    "thumbnail": {
+        "@id": "https://ids.lib.harvard.edu/ids/iiif/47173419/full/!170,170/0/default.jpg",
+        "service": {
+            "@context": "http://iiif.io/api/image/2/context.json",
+            "@id": "https://ids.lib.harvard.edu/ids/iiif/47173419",
+            "profile": "http://iiif.io/api/image/2/level2.json"
+        }
+    },
+    "within": "https://www.harvardartmuseums.org/collections"
+}

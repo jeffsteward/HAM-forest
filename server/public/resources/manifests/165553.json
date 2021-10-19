@@ -1,0 +1,116 @@
+{
+    "@context": "http://iiif.io/api/presentation/2/context.json",
+    "@id": "https://iiif.harvardartmuseums.org/manifests/object/165553",
+    "@type": "sc:Manifest",
+    "attribution": "Harvard Art Museums",
+    "description": "",
+    "label": "Special Blue i",
+    "logo": {
+        "@id": "https://ids.lib.harvard.edu/ids/iiif/437958013/full/!800,800/0/default.jpg",
+        "service": {
+            "@context": "http://iiif.io/api/image/2/context.json",
+            "@id": "https://ids.lib.harvard.edu/ids/iiif/437958013",
+            "profile": "http://iiif.io/api/image/2/level2.json"
+        }
+    },
+    "metadata": [
+        {
+            "label": "Date",
+            "value": "1969"
+        },
+        {
+            "label": "Classification",
+            "value": "Prints"
+        },
+        {
+            "label": "Credit Line",
+            "value": "Harvard Art Museums/Fogg Museum, Walter A. Compton, Jr., Bequest Fund"
+        },
+        {
+            "label": "Object Number",
+            "value": "M24398.3"
+        },
+        {
+            "label": "People",
+            "value": [
+                "Artist: Lee Krasner, American, 1908 - 1984"
+            ]
+        },
+        {
+            "label": "Medium",
+            "value": "Lithograph in blue ink on white wove paper"
+        },
+        {
+            "label": "Technique",
+            "value": "Lithograph"
+        },
+        {
+            "label": "Dimensions",
+            "value": "sheet: 57.3 x 76.4 cm (22 9/16 x 30 1/16 in.)"
+        },
+        {
+            "label": "Provenance",
+            "value": "[G. W. Einstein Company, Inc., New York, New York], sold; to Harvard University Art Museums, June 7, 2000."
+        },
+        {
+            "label": "Copyright",
+            "value": "© Pollock-Krasner Foundation / Artists Rights Society (ARS), NY"
+        }
+    ],
+    "rendering": {
+        "@id": "https://www.harvardartmuseums.org/collections/object/165553",
+        "format": "text/html",
+        "label": "Full record view"
+    },
+    "sequences": [
+        {
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/165553/sequence/normal",
+            "@type": "sc:Sequence",
+            "canvases": [
+                {
+                    "@id": "https://iiif.harvardartmuseums.org/manifests/object/165553/canvas/canvas-459829195",
+                    "@type": "sc:Canvas",
+                    "height": 1912,
+                    "images": [
+                        {
+                            "@id": "https://iiif.harvardartmuseums.org/manifests/object/165553/annotation/anno-459829195",
+                            "@type": "oa:Annotation",
+                            "motivation": "sc:painting",
+                            "on": "https://iiif.harvardartmuseums.org/manifests/object/165553/canvas/canvas-459829195",
+                            "resource": {
+                                "@id": "https://ids.lib.harvard.edu/ids/iiif/459829195/full/full/0/default.jpg",
+                                "@type": "dctypes:Image",
+                                "format": "image/jpeg",
+                                "height": 1912,
+                                "service": {
+                                    "@context": "http://iiif.io/api/image/2/context.json",
+                                    "@id": "https://ids.lib.harvard.edu/ids/iiif/459829195",
+                                    "profile": "http://iiif.io/api/image/2/level2.json"
+                                },
+                                "width": 2550
+                            }
+                        }
+                    ],
+                    "label": "1",
+                    "otherContent": [
+                        {
+                            "@id": "https://iiif.harvardartmuseums.org/manifests/object/165553/list/459829195",
+                            "@type": "sc:AnnotationList"
+                        }
+                    ],
+                    "width": 2550
+                }
+            ],
+            "viewingHint": "individuals"
+        }
+    ],
+    "thumbnail": {
+        "@id": "https://ids.lib.harvard.edu/ids/iiif/459829195/full/!170,170/0/default.jpg",
+        "service": {
+            "@context": "http://iiif.io/api/image/2/context.json",
+            "@id": "https://ids.lib.harvard.edu/ids/iiif/459829195",
+            "profile": "http://iiif.io/api/image/2/level2.json"
+        }
+    },
+    "within": "https://www.harvardartmuseums.org/collections"
+}

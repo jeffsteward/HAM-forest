@@ -1,0 +1,134 @@
+{
+    "@context": "http://iiif.io/api/presentation/2/context.json",
+    "@id": "https://www.harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/6012/art-forest-states-of-play/iiif/top",
+    "@type": "sc:Collection",
+    "label": "Art Forest: States of Play",
+    "manifests": [
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/323716",
+            "@type": "sc:Manifest",
+            "label": "Self-Portrait"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/337638",
+            "@type": "sc:Manifest",
+            "label": "The Buoy (Port of St. Tropez)"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/340023",
+            "@type": "sc:Manifest",
+            "label": "In the Ashes"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/340022",
+            "@type": "sc:Manifest",
+            "label": "The Spirits of Dead Cities"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/343026.json",
+            "@type": "sc:Manifest",
+            "label": "Woman's Head against the Shore"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/340018",
+            "@type": "sc:Manifest",
+            "label": "The Spirits of Dead Cities"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/361185",
+            "@type": "sc:Manifest",
+            "label": "Unity"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/362475.json",
+            "@type": "sc:Manifest",
+            "label": "Jacqueline with Glossy Hair (state v/v: black on blue on red on yellow on beige)"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/236196",
+            "@type": "sc:Manifest",
+            "label": "Salisbury Cathedral from the Meadows"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/274223",
+            "@type": "sc:Manifest",
+            "label": "The Old Port of Messina"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/279540",
+            "@type": "sc:Manifest",
+            "label": "Carlo Goldoni"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/279352",
+            "@type": "sc:Manifest",
+            "label": "Christ Crucified between the Two Thieves"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/278675",
+            "@type": "sc:Manifest",
+            "label": "Charles I of England with the Duke of Hamilton"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/262181",
+            "@type": "sc:Manifest",
+            "label": "Christ Crucified between the Two Thieves"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/300063.json",
+            "@type": "sc:Manifest",
+            "label": "Complex Forms"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/263181.json",
+            "@type": "sc:Manifest",
+            "label": "1st Stage Etching"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/78412.json",
+            "@type": "sc:Manifest",
+            "label": "Untitled"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/164976.json",
+            "@type": "sc:Manifest",
+            "label": "Special Blue h"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/262735.json",
+            "@type": "sc:Manifest",
+            "label": "Color Proof I"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "/resources/manifests/165553.json",
+            "@type": "sc:Manifest",
+            "label": "Special Blue i"
+        },
+        {
+            "@context": "http://iiif.io/api/presentation/2/context.json",
+            "@id": "https://iiif.harvardartmuseums.org/manifests/object/361229",
+            "@type": "sc:Manifest",
+            "label": "Unity (mylar/separation)"
+        }
+    ]
+}
