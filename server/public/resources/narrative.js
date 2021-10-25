@@ -90,7 +90,7 @@ const narrative = {
 
         Occassionaly animations will play as a result of a command. Enjoy! There's nothing for you to do except take them in while they play out. Hopefully they make your time here a bit more enjoyable.
 
-        Most commands take the form VERB NOUN (i.e. ACTION TARGET). For example, 'look at the bench'. Or, 'listen at the forest'. Here are some verbs you might consider expermienting with:
+        Most commands take the form VERB NOUN (i.e. ACTION TARGET). For example, 'look at the bench'. Or, 'listen to the forest'. Here are some verbs you might consider expermienting with:
 
         open
         look
