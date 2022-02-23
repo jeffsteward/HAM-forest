@@ -34,6 +34,7 @@ You pick up the grafting apparatus and get to work.
 // sceneModel = {
 //  sceneName: {
 //   name: `INTERNAL_NAME`,
+//   sync: true
 //   description: `TEXT_TO_DISPLAY_ON_THE_GAME_BOARD`,
 //   prompt: ``,
 //   destination: `NAME_OF_SCENE`,
@@ -97,8 +98,9 @@ const narrative = {
         listen
         quiet
         photograph`,
+      inventory: `You are carrying: `,
       error: `I'm afraid I don't understand what you're asking me.`,
-      startScene: `intro`
+      startScene: `field`
     },
     resources: {
       board: [
@@ -123,7 +125,8 @@ const narrative = {
     commands: {
       board: [
         'help',
-        'credits'
+        'credits',
+        'inventory'
       ],
       window: [
         'status'
@@ -131,32 +134,79 @@ const narrative = {
     },
     scenes: {
       window: {
-        intro: {
-          name: `intro`,
+        field: {
+          name: `field`,
           description: ``,
           animation: {
             name: `forest`,
             startDelay: 0
-          } 
+          },
+          commands: {
+            'go': {
+              targets: {
+                'east': {
+                  destination: 'house' 
+                }
+              }
+            }
+          }          
+        },
+        house: {
+          name: `house`,
+          description: ``,
+          commands: {
+            'go': {
+              targets: {
+                'west': {
+                  destination: 'field'
+                }
+              }
+            }
+          }           
         }
       },
       board: {
-        intro: {
-          name: `intro`,
+        field: {
+          name: `field`,
+          sync: true,
           description: 
             `West of House
             You are standing in an open field west of a white house, with a boarded front door.
             There is a small grafting bench here.`,
-          prompt: `look at the bench`,
+          prompt: ``,
           commands: {
+            'go': {
+              targets: {
+                'east': {
+                  destination: 'house'
+                },
+                'west': {
+                  description: `You take a step farther in to the field then notice the ground is shimmering in an unsettling way. You step back in haste.`
+                },
+                'north': {
+                  description: `Despite the urge to explore to the north, you hesitate, then stop yourself from pressing on.`
+                },
+                'south': {
+                  description: `Despite the urge to explore to the south, you hesitate, then stop yourself from pressing on.`
+                }
+              }
+            },             
+            'pickup': {
+              targets: {
+                'apparatus': {
+                  name: 'grafting apparatus',
+                  description: `You pickup the grafting apparatus. It's surprisingly light.`
+                }
+              }
+            },
             'look': {
               targets: {
                   'bench': {
                       name: `bench`,    
-                      description:
-                        `The bench is worn from centuries of use.
-                        On it is a pile of seed packets and a grafting apparatus.`,
-                      prompt: `look at the packets`
+                      description: 
+                          `The bench is worn from centuries of use.
+                          On it is a pile of seed packets and a grafting apparatus.`,
+                      prompt: ``
                   },
                   'packets': {
                       name: `packets`,
@@ -171,7 +221,7 @@ const narrative = {
                         Small Seeds
                         USDA All Purpose Seeds
                         Grow at Your Own Risk`,
-                      prompt: `open mixed seeds`
+                      prompt: ``
                   },
                   'forest': {
                     name: 'forest',
@@ -186,7 +236,6 @@ const narrative = {
                   }
               } 
             },
-
             'open': {
               targets: {
                 'mixed seeds': {
@@ -194,7 +243,7 @@ const narrative = {
                     description:
                       `As you tear open the packet a big gust of wind blows it from your hand.
                       The seeds scatter across the open field.`,
-                    prompt: `open seeds of change`,
+                    prompt: ``,
                     animation: {
                       name: `wind`,
                       startDelay: 1000
@@ -205,7 +254,7 @@ const narrative = {
                     description: 
                       `You pick up another packet and tear it open. This time the seeds spill on to the bench. 
                       Upon close inspection you notice each one is unique and covered in strange markings.`,
-                    prompt: `use grafting apparatus`,
+                    prompt: ``,
                     animation: {
                       name: `spill`,
                       startDelay: 500
@@ -227,7 +276,7 @@ const narrative = {
                   interactive: {
                     name: `Apparatus`,
                     properties: [
-                      `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/4505/art-forest-the-feinberg-collection/iiif/top`
+                      `https://harvardartmuseums.org/profile/jeff_steward@harvard.edu/mycollections/3904/video-wall-test/iiif/top`
                     ]
                   }
                 },
@@ -358,8 +407,45 @@ const narrative = {
           animation: {
             name: ``,
             startDelay: 0
-          } 
-        }
+          },
+        },
+        house: {
+          name: `house`,
+          sync: true,
+          description: 
+            `East of Field
+            You are at the white house. There is a message scrawled across the boarded door.`,
+          commands: {
+            'go': {
+              targets: {
+                'west': {
+                  destination: 'field'
+                },
+                'east': {
+                  description: 'The house stands in your way. It is totally boarded up and seems pretty determined to keep you out.'
+                }
+              }
+            },
+            'look': {
+              targets: {
+                'house': {
+                  description: `It's a modest, two story house. Quiet and unassuming. It definitely wants to be left alone. The open field OTOH...`
+                },
+                'message': {
+                  description: 
+                    `The message was hastily written and a bit faded. It must have been written ages ago. It states:
+
+                    --------------------------------------------------
+                    The forest has been acting odd lately. 
+                    Gone to see how it's feeling. 
+                    ✨🍄🌳🌲✨
+                    Be back someday.
+                    --------------------------------------------------`
+                }
+              }
+            }
+          },
+        }        
       }
     }
   };
