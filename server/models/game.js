@@ -16,7 +16,8 @@ const modelGame = {
     window: {
         currentScene: narrative.info.startScene,
         history: []
-    }
+    },
+    inventory: []
 };
 
 const modelScene = {
@@ -72,6 +73,10 @@ function move(context) {
     // check if the command is a general game command
     if (narrative.commands[context.view].includes(context.command )) {
         scene.description = narrative.info[context.command];
+            
+        if (context.command === 'inventory') {
+            scene.description += game.inventory.toString();
+        }
 
     } else {
         // load current scene info
