@@ -84,6 +84,10 @@ function sendCommand(command) {
         takeAction(command).then(result => {
             game.scene = result;
             updateBoard();
+
+            if (game.scene.sync) {
+                sendMessage({action: 'scene-sync', packet: {command: command}});
+            }
         });
     }
 }

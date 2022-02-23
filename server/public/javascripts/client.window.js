@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", event => {
 
         updateWindow();
     });
+
+    socket.on('scene-sync', data => sendCommand(data.command));
 });
 
 async function startGame() {
@@ -23,6 +25,36 @@ async function startGame() {
 
     return start;
 }
+
+async function takeAction(command) {
+    const body = {
+        currentScene: game.scene.name,
+        command: `${command}`
+    };
+
+    const response = await fetch(`/game/${game.gameID}/${GameViews.WINDOW}/commands`, 
+        {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+    const scene = await response.json();
+
+    return scene;
+}
+
+function sendCommand(command) {
+    if (command !== '') {
+        // send the action on to the game MCP
+        takeAction(command).then(result => {
+            game.scene = result;
+            updateWindow();
+        });
+    }
+}
+
 
 function updateWindow() {
     // update the animation
