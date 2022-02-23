@@ -21,12 +21,8 @@ class Tree {
         this._soundVolume = 0.0;
 
         let sounds = [
-            'TL41799.7.mp3',
-            'TL42018.6.mp3',
-            'TL42096.9.mp3',
-            'TL42147.19.mp3',
-            'TL42147.34.mp3',
-            'TL42147.36.mp3'
+            'tick-tock.mp3',
+            'birds-1.mp3'
         ];
 
         let randomSound = sketch.round(sketch.random(0, sounds.length-1));

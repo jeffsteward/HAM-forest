@@ -77,8 +77,6 @@ const narrative = {
       credits: 
         `Game design and programming by Jeff Steward
         
-        Sound and music by Hayley Murks-Abdikadirova
-        
         Art images courtesy of <a href="https://www.harvardartmuseums.org" target="_blank">Harvard Art Museums</a>
         
         Art Forest is a work in progress. It started in May 2019 and continues to grow.`,
