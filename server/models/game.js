@@ -9,6 +9,7 @@ let games = db.addCollection('games', {indices: 'id'});
 
 const modelGame = {
     id: '',
+    startTime: '',
     board: {
         currentScene: narrative.info.startScene,
         history: []
@@ -17,7 +18,17 @@ const modelGame = {
         currentScene: narrative.info.startScene,
         history: []
     },
-    inventory: []
+    inventory: [],
+    getStats: function() {
+        let minutesPlayed = Math.round((new Date() - this.startTime)/60000);
+
+        return `Game ID: ${this.id}
+        Start Time: ${this.startTime}
+        Play Time: ${minutesPlayed} minutes
+        Moves: ${this.board.history.length}
+        Board Current Scene: ${this.board.currentScene}
+        Window Current Scene: ${this.window.currentScene}`;
+    }
 };
 
 const modelScene = {
@@ -37,6 +48,7 @@ function create(view) {
 
     if (view === 'board') {
         game.id = (Math.floor(new Date() / 1000)).toString(36);
+        game.startTime = new Date();
         game.board.currentScene = narrative.info.startScene;
         game.window.currentScene = narrative.info.startScene; 
         games.insert(game);
