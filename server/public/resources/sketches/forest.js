@@ -84,7 +84,6 @@ const forest = (sketch) => {
 
     sketch.keyTyped = () => {
         if (sketch.key === 's') {
-            clearForest();
         }
         // prevent any default browser behavior
         return false;
