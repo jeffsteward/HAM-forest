@@ -199,6 +199,9 @@ const narrative = {
             },
             'look': {
               targets: {
+                  'field': {
+                    description: `It's an odd field. Or maybe it's even.`
+                  },
                   'bench': {
                       name: `bench`,    
                       description: 
