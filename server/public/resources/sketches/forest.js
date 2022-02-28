@@ -41,7 +41,9 @@ const forest = (sketch) => {
     }
 
     sketch.drawTree = (data) => {
-        trees.push(new Tree(sketch, sketch.random(0,sketch.windowWidth), sketch.windowHeight, sketch.random(100, sketch.windowHeight/2.10), soundOn, data));
+        xPos = sketch.random(0,sketch.windowWidth);
+        yPos = sketch.random(sketch.windowHeight/2, sketch.windowHeight);
+        trees.push(new Tree(sketch, xPos, yPos, sketch.random(100, sketch.windowHeight/2.10), soundOn, data));
     }
 
     sketch.createTree = (data) => {
