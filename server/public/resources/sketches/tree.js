@@ -17,6 +17,7 @@ class Tree {
         this.lifeSpan = 0;
         this.maximumAge = 0;
         this.isAlive = false;
+        this.data;
         this._sound;
         this._soundVolume = 0.0;
 
@@ -34,6 +35,7 @@ class Tree {
                 this.branch = img;
 
                 sketch.loadJSON('/data/object/' + data.objectID, (objectData) => {
+                    this.data = objectData;
                     if (objectData.totalpageviews < 250) {
                         this.maximumAge = objectData.totalpageviews*50;
                     } else if (objectData.totalpageviews < 500) {
