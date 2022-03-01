@@ -200,7 +200,9 @@ const narrative = {
             'look': {
               targets: {
                   'field': {
-                    description: `It's an odd field. Or maybe it's even.`
+                    description: 
+                          `It's an odd field. Or maybe it's even.
+                          That bench sure seems interesting. Perhaps it's worth taking a look.`
                   },
                   'bench': {
                       name: `bench`,    
@@ -424,7 +426,13 @@ const narrative = {
                 },
                 'east': {
                   description: 'The house stands in your way. It is totally boarded up and seems pretty determined to keep you out.'
-                }
+                },
+                'north': {
+                  description: `No can do.`
+                },
+                'south': {
+                  description: `No can do.`
+                }                
               }
             },
             'look': {
